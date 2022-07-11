@@ -17,5 +17,10 @@ namespace FakturniakUI
             InitializeComponent();
         }
 
+        private void NowaFaktura_Click(object sender, EventArgs e)
+        {
+            FormFaktura formFaktura = new FormFaktura();
+            formFaktura.Show();
+        }
     }
 }

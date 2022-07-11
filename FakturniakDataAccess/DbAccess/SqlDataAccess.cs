@@ -9,23 +9,24 @@ namespace FakturniakDataAccess.DbAccess
 {
     public class SqlDataAccess : ISqlDataAccess
     {
-        private readonly IConfiguration _config;
+        Helper helper = new Helper();
+        private string cnnStr;
 
-        public SqlDataAccess(IConfiguration config)
+        public SqlDataAccess()
         {
-            _config = config;
+            cnnStr = helper.getConnectionString("FakturniakDB");
         }
 
-        public async Task<IEnumerable<T>> LoadData<T, U>(string storedProcedure, U parameters, string connectionId = "Default")
+        public async Task<IEnumerable<T>> LoadData<T, U>(string storedProcedure, U parameters)
         {
-            using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
+            using IDbConnection connection = new SqlConnection(cnnStr);
 
             return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task SaveData<T>(string storedProcedure, T parameters, string connectionId = "Default")
+        public async Task SaveData<T>(string storedProcedure, T parameters)
         {
-            using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
+            using IDbConnection connection = new SqlConnection(cnnStr);
 
             await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
         }

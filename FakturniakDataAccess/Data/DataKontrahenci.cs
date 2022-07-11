@@ -3,12 +3,14 @@ using FakturniakDataAccess.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace FakturniakDataAccess.Data
 {
     public class DataKontrahenci : IDataKontrahenci
     {
         private readonly ISqlDataAccess _db;
+
         public DataKontrahenci(ISqlDataAccess db)
         {
             _db = db;
@@ -19,7 +21,7 @@ namespace FakturniakDataAccess.Data
 
         public async Task<ModelKontrahent?> LoadKontrahent(int id)
         {
-            var results = await _db.LoadData<ModelKontrahent, dynamic>("dbo.spKontrahenci_GetById", new { id_ka = id });
+            var results = await _db.LoadData<ModelKontrahent, dynamic>("dbo.spKontrahenci_GetById", new { id_kontrahenta = id });
             return results.FirstOrDefault();
         }
 
