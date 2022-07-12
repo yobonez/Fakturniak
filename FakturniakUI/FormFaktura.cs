@@ -20,27 +20,96 @@ namespace FakturniakUI
     {
         readonly ISqlDataAccess dataAccess = new SqlDataAccess();
 
+
+        //List<ModelKontrahent> sprzedawcy;
+        //List<ModelKontrahent> nabywcy;
+
+        List<ModelProdukt> produkty;
+
+
         public FormFaktura()
         {
             InitializeComponent();
         }
 
-        private void FormFaktura_Load(object sender, EventArgs e)
-        { 
+        private async void FormFaktura_Load(object sender, EventArgs e)
+        {
+            IDataProdukty dataProdukty = new DataProdukty(dataAccess);
+            await Task.Run(() => produkty = dataProdukty.Get().Result.ToList());
+
+            populateProdukty(produkty.Count);
+
+            // poniżej dodawałem produkty do listboxa, ale to źle wygląda, stworzę user control
+            /*
+            foreach (ModelProdukt produkt in produkty)
+            {
+                string nazwa = produkt.nazwa;
+                float cena_netto = produkt.cena_netto;
+                float cena_brutto = produkt.cena_brutto;
+
+                string produktStr = nazwa + " | netto: " + cena_netto + " | brutto: " + cena_netto;
+
+                listBoxProdukty.Items.Add(produktStr);
+            }
+            */
+
+            /*
+            IDataKontrahenci dataKontrahenci = new DataKontrahenci(dataAccess);
+            
+            
+            await Task.Run(() => sprzedawcy = dataKontrahenci.Get().Result.ToList());
+            await Task.Run(() => nabywcy = dataKontrahenci.Get().Result.ToList());
+            */
         }
 
-        private async void Wystaw_Click(object sender, EventArgs e)
+        private void populateProdukty(int count)
         {
-            // TODO: wyrzuć taski, to było wg tutoriala do minimal api, a my mamy WinForms
+            UCProdukt[] ucProdukty = new UCProdukt[count];
+            
+            for(int i = 0; i < count; i++)
+            {
+                UCProdukt tempUcProdukt = new UCProdukt();
 
-            IDataFaktury dataKontrahenci = new DataFaktury(dataAccess);
-            Task<ModelFaktura> kontrahent = dataKontrahenci.LoadFaktura("FV 002/07-2022");
+                string nazwa = produkty[i].nazwa;
+                float cena_netto = produkty[i].cena_netto;
+                float cena_brutto = produkty[i].cena_brutto;
 
-            string numer = "";
+                tempUcProdukt.nazwa = nazwa;
+                tempUcProdukt.cena_netto = cena_netto;
+                tempUcProdukt.cena_brutto = cena_brutto;
 
-            await Task.Run(() => { numer = kontrahent.Result.miejsce_wystawienia; });
 
-            textBox1.Text = numer;
+                ucProdukty[i] = tempUcProdukt;
+
+                if (flowLayoutPanel1.Controls.Count < 0)
+                    flowLayoutPanel1.Controls.Clear();
+                else
+                    flowLayoutPanel1.Controls.Add(ucProdukty[i]);
+            }
+        }
+
+        private void Wystaw_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
+
+
+
+
+
+
+
+
+
+/*
+IDataFaktury dataKontrahenci = new DataFaktury(dataAccess);
+Task<ModelFaktura> kontrahent = dataKontrahenci.Load("FV 002/07-2022");
+
+string numer = "";
+
+await Task.Run(() => { numer = kontrahent.Result.miejsce_wystawienia; });
+
+textBox1.Text = numer;
+*/

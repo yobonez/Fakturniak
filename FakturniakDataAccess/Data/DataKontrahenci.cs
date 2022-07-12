@@ -16,20 +16,20 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        public Task<IEnumerable<ModelKontrahent>> GetKontrahenci() =>
+        public Task<IEnumerable<ModelKontrahent>> Get() =>
             _db.LoadData<ModelKontrahent, dynamic>("dbo.spKontrahenci_GetAll", new { });
 
-        public async Task<ModelKontrahent?> LoadKontrahent(int id)
+        public async Task<ModelKontrahent?> Load(int id)
         {
             var results = await _db.LoadData<ModelKontrahent, dynamic>("dbo.spKontrahenci_GetById", new { id_kontrahenta = id });
             return results.FirstOrDefault();
         }
 
-        public Task InsertKontrahent(ModelKontrahent k) =>
+        public Task Insert(ModelKontrahent k) =>
             _db.SaveData(
                 "dbo.spKontrahenci_Add",
                 new { k.imie, k.nazwisko, k.nazwa, k.nip, k.regon, k.krs, k.pesel, k.email, k.telefon, k.adres, k.kod_pocztowy, k.miasto, k.numer_konta, k.swift });
-        public Task DeleteKontrahent(int id) =>
+        public Task Delete(int id) =>
             _db.SaveData("dbo.spKontrahenci_Delete", new { id_kontrahenta = id });
     }
 }

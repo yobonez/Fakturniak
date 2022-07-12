@@ -6,9 +6,9 @@ namespace FakturniakDataAccess.Data
 {
     public interface IDataFaktury
     {
-        Task DeleteFaktura(string _numer_faktury);
-        Task<IEnumerable<ModelFaktura>> GetFaktury();
-        Task InsertFaktura(ModelFaktura f);
-        Task<ModelFaktura> LoadFaktura(string _numer_faktury);
+        Task Delete(string _numer_faktury);
+        Task<IEnumerable<ModelFaktura>> Get();
+        Task Insert(ModelFaktura f);
+        Task<ModelFaktura> Load(string _numer_faktury);
     }
 }

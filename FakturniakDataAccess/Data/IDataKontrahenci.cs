@@ -6,9 +6,9 @@ namespace FakturniakDataAccess.Data
 {
     public interface IDataKontrahenci
     {
-        Task DeleteKontrahent(int id);
-        Task<IEnumerable<ModelKontrahent>> GetKontrahenci();
-        Task InsertKontrahent(ModelKontrahent k);
-        Task<ModelKontrahent> LoadKontrahent(int id);
+        Task Delete(int id);
+        Task<IEnumerable<ModelKontrahent>> Get();
+        Task Insert(ModelKontrahent k);
+        Task<ModelKontrahent> Load(int id);
     }
 }
