@@ -2,7 +2,6 @@
 using FakturniakDataAccess.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FakturniakDataAccess.Data
@@ -37,6 +36,9 @@ namespace FakturniakDataAccess.Data
             _db.SaveData(
                 "dbo.spProdukty_AddByBrutto",
                 new { p.nazwa, p.cena_brutto, p.id_jednostki, p.id_stawki });
+
+        public Task<IEnumerable<ModelProdukt>> Search(string _input) =>
+            _db.LoadData<ModelProdukt, dynamic>("dbo.spProdukty_Search", new { input = _input });
 
         public Task Delete(int _id_produktu) =>
             _db.SaveData("dbo.spProdukty_Delete", new { id_produktu = _id_produktu });

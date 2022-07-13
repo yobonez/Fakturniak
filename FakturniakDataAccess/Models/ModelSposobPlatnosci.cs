@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FakturniakDataAccess.Models
 {
-    public class ModelJednostkaMiary
+    public class ModelSposobPlatnosci
     {
-        public int id_jednostki { get; set; }
+        public int id_sposob_platnosci { get; set; }
         public string nazwa { get; set; }
     }
 }

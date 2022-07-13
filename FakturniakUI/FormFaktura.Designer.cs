@@ -31,6 +31,7 @@ namespace FakturniakUI
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxSzukaj = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -38,7 +39,7 @@ namespace FakturniakUI
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonDodajProduktUsluge = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProduktUsluga = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -146,35 +147,47 @@ namespace FakturniakUI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBoxSzukaj);
             this.groupBox1.Controls.Add(this.flowLayoutPanel1);
             this.groupBox1.Controls.Add(this.tabControl1);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.buttonDodajProduktUsluge);
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Controls.Add(this.groupBoxInformacje);
             this.groupBox1.Controls.Add(this.groupBoxNabywca);
             this.groupBox1.Controls.Add(this.groupBoxSprzedawca);
             this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1138, 722);
+            this.groupBox1.Size = new System.Drawing.Size(1138, 770);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dane faktury";
+            // 
+            // textBoxSzukaj
+            // 
+            this.textBoxSzukaj.Location = new System.Drawing.Point(12, 625);
+            this.textBoxSzukaj.Name = "textBoxSzukaj";
+            this.textBoxSzukaj.Size = new System.Drawing.Size(168, 23);
+            this.textBoxSzukaj.TabIndex = 11;
+            this.textBoxSzukaj.Text = "Szukaj...";
+            this.textBoxSzukaj.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSzukaj_MouseClick);
+            this.textBoxSzukaj.TextChanged += new System.EventHandler(this.textBoxSzukaj_TextChanged);
+            this.textBoxSzukaj.MouseLeave += new System.EventHandler(this.textBoxSzukaj_MouseLeave);
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(10, 627);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 650);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(415, 85);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(415, 114);
             this.flowLayoutPanel1.TabIndex = 10;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(482, 598);
+            this.tabControl1.Location = new System.Drawing.Point(466, 646);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(252, 118);
@@ -229,14 +242,15 @@ namespace FakturniakUI
             this.button2.Text = "Usuń produkt/usługę";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonDodajProduktUsluge
             // 
-            this.button1.Location = new System.Drawing.Point(6, 598);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Dodaj produkt/usługę";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonDodajProduktUsluge.Location = new System.Drawing.Point(6, 598);
+            this.buttonDodajProduktUsluge.Name = "buttonDodajProduktUsluge";
+            this.buttonDodajProduktUsluge.Size = new System.Drawing.Size(132, 23);
+            this.buttonDodajProduktUsluge.TabIndex = 8;
+            this.buttonDodajProduktUsluge.Text = "Dodaj produkt/usługę";
+            this.buttonDodajProduktUsluge.UseVisualStyleBackColor = true;
+            this.buttonDodajProduktUsluge.Click += new System.EventHandler(this.buttonDodajProduktUsluge_Click);
             // 
             // dataGridView1
             // 
@@ -259,12 +273,14 @@ namespace FakturniakUI
             // 
             // lp
             // 
+            this.lp.DataPropertyName = "lp";
             this.lp.HeaderText = "L.p.";
             this.lp.Name = "lp";
             this.lp.ReadOnly = true;
             // 
             // ProduktUsluga
             // 
+            this.ProduktUsluga.DataPropertyName = "ProduktUsluga";
             this.ProduktUsluga.HeaderText = "Produkt/Usługa";
             this.ProduktUsluga.MaxInputLength = 200;
             this.ProduktUsluga.Name = "ProduktUsluga";
@@ -959,7 +975,7 @@ namespace FakturniakUI
             // 
             // Wystaw
             // 
-            this.Wystaw.Location = new System.Drawing.Point(504, 779);
+            this.Wystaw.Location = new System.Drawing.Point(504, 820);
             this.Wystaw.Name = "Wystaw";
             this.Wystaw.Size = new System.Drawing.Size(141, 23);
             this.Wystaw.TabIndex = 2;
@@ -970,7 +986,7 @@ namespace FakturniakUI
             // label9
             // 
             this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.Location = new System.Drawing.Point(15, 774);
+            this.label9.Location = new System.Drawing.Point(15, 815);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(1138, 2);
             this.label9.TabIndex = 7;
@@ -980,7 +996,7 @@ namespace FakturniakUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1162, 808);
+            this.ClientSize = new System.Drawing.Size(1162, 846);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.Wystaw);
@@ -993,6 +1009,7 @@ namespace FakturniakUI
             this.Text = "FormFaktura";
             this.Load += new System.EventHandler(this.FormFaktura_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -1093,6 +1110,16 @@ namespace FakturniakUI
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonDodajProduktUsluge;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.TextBox textBoxSzukaj;
         private System.Windows.Forms.DataGridViewTextBoxColumn lp;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProduktUsluga;
         private System.Windows.Forms.DataGridViewTextBoxColumn jm;
@@ -1102,14 +1129,5 @@ namespace FakturniakUI
         private System.Windows.Forms.DataGridViewTextBoxColumn SVAT;
         private System.Windows.Forms.DataGridViewTextBoxColumn KVAT;
         private System.Windows.Forms.DataGridViewTextBoxColumn WBrutto;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

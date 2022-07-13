@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FakturniakDataAccess.Models
 {
-    public class ModelJednostkaMiary
+    public class ModelMTMFakturaProdukt
     {
-        public int id_jednostki { get; set; }
-        public string nazwa { get; set; }
+        public string numer_faktury { get; set; }
+        public int id_produktu { get; set; }
+        public int ilosc { get; set; }
     }
 }

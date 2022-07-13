@@ -49,6 +49,8 @@ namespace FakturniakUI
             this.labelProduktUsluga.TabIndex = 0;
             this.labelProduktUsluga.Text = "Przykładowy produkt/usługa";
             this.labelProduktUsluga.Click += new System.EventHandler(this.labelProduktUsluga_Click);
+            this.labelProduktUsluga.MouseEnter += new System.EventHandler(this.labelProduktUsluga_MouseEnter);
+            this.labelProduktUsluga.MouseLeave += new System.EventHandler(this.labelProduktUsluga_MouseLeave);
             // 
             // labelNetto
             // 
@@ -94,7 +96,7 @@ namespace FakturniakUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Info;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label9);
@@ -104,6 +106,10 @@ namespace FakturniakUI
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UCProdukt";
             this.Size = new System.Drawing.Size(408, 17);
+            this.Click += new System.EventHandler(this.UCProdukt_Click);
+            this.DoubleClick += new System.EventHandler(this.UCProdukt_DoubleClick);
+            this.MouseEnter += new System.EventHandler(this.UCProdukt_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.UCProdukt_MouseLeave);
             this.ResumeLayout(false);
 
         }
