@@ -40,7 +40,7 @@ namespace FakturniakUI
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonDodajProduktUsluge = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewMTMProdukty = new System.Windows.Forms.DataGridView();
             this.lp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProduktUsluga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jm = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,7 +54,7 @@ namespace FakturniakUI
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxMetodyPlatnosci = new System.Windows.Forms.ComboBox();
             this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -65,28 +65,29 @@ namespace FakturniakUI
             this.label2 = new System.Windows.Forms.Label();
             this.textBox20 = new System.Windows.Forms.TextBox();
             this.groupBoxNabywca = new System.Windows.Forms.GroupBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.buttonWybierz = new System.Windows.Forms.Button();
+            this.panelNabywca3 = new System.Windows.Forms.Panel();
             this.LabelNMiasto = new System.Windows.Forms.Label();
             this.LabelNAdres = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
             this.LabelNKodPocztowy = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.checkBoxNREGON = new System.Windows.Forms.CheckBox();
-            this.checkBoxNKRS = new System.Windows.Forms.CheckBox();
-            this.checkBoxNNIP = new System.Windows.Forms.CheckBox();
-            this.checkBoxNPESEL = new System.Windows.Forms.CheckBox();
-            this.textBoxNPESEL = new System.Windows.Forms.TextBox();
-            this.textBoxNREGON = new System.Windows.Forms.TextBox();
-            this.textBoxNNIP = new System.Windows.Forms.TextBox();
-            this.textBoxNKRS = new System.Windows.Forms.TextBox();
-            this.textBoxNIMIE = new System.Windows.Forms.TextBox();
-            this.LabelNImie = new System.Windows.Forms.Label();
+            this.maskedTextBoxKodPocztowy = new System.Windows.Forms.MaskedTextBox();
+            this.textBoxNAdres = new System.Windows.Forms.TextBox();
+            this.textBoxNMiasto = new System.Windows.Forms.TextBox();
+            this.panelNabywca2 = new System.Windows.Forms.Panel();
+            this.checkBoxNNumery4 = new System.Windows.Forms.CheckBox();
+            this.checkBoxNNumery3 = new System.Windows.Forms.CheckBox();
+            this.checkBoxNNumery2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxNNumery1 = new System.Windows.Forms.CheckBox();
+            this.textBoxNNumery1 = new System.Windows.Forms.TextBox();
+            this.textBoxNNumery4 = new System.Windows.Forms.TextBox();
+            this.textBoxNNumery2 = new System.Windows.Forms.TextBox();
+            this.textBoxNNumery3 = new System.Windows.Forms.TextBox();
+            this.panelNabywca1 = new System.Windows.Forms.Panel();
             this.LabelNNazwa = new System.Windows.Forms.Label();
-            this.textBoxNNAZWA = new System.Windows.Forms.TextBox();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.LabelNImie = new System.Windows.Forms.Label();
             this.LabelNNazwisko = new System.Windows.Forms.Label();
+            this.textBoxNNAZWA = new System.Windows.Forms.TextBox();
+            this.textBoxNIMIE = new System.Windows.Forms.TextBox();
             this.textBoxNNAZWISKO = new System.Windows.Forms.TextBox();
             this.groupBoxSprzedawca = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -101,10 +102,10 @@ namespace FakturniakUI
             this.checkBoxSKRS = new System.Windows.Forms.CheckBox();
             this.checkBoxSNIP = new System.Windows.Forms.CheckBox();
             this.checkBoxSPESEL = new System.Windows.Forms.CheckBox();
-            this.textBoxSPESEL = new System.Windows.Forms.TextBox();
-            this.textBoxSREGON = new System.Windows.Forms.TextBox();
-            this.textBoxSNIP = new System.Windows.Forms.TextBox();
-            this.textBoxSKRS = new System.Windows.Forms.TextBox();
+            this.textBoxSNumery1 = new System.Windows.Forms.TextBox();
+            this.textBoxSNumery4 = new System.Windows.Forms.TextBox();
+            this.textBoxSNumery2 = new System.Windows.Forms.TextBox();
+            this.textBoxSNumery3 = new System.Windows.Forms.TextBox();
             this.textBoxSIMIE = new System.Windows.Forms.TextBox();
             this.LabelSImie = new System.Windows.Forms.Label();
             this.LabelSNazwa = new System.Windows.Forms.Label();
@@ -122,13 +123,13 @@ namespace FakturniakUI
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMTMProdukty)).BeginInit();
             this.groupBoxInformacje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxNabywca.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.panelNabywca3.SuspendLayout();
+            this.panelNabywca2.SuspendLayout();
+            this.panelNabywca1.SuspendLayout();
             this.groupBoxSprzedawca.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -152,20 +153,20 @@ namespace FakturniakUI
             this.groupBox1.Controls.Add(this.tabControl1);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.buttonDodajProduktUsluge);
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dataGridViewMTMProdukty);
             this.groupBox1.Controls.Add(this.groupBoxInformacje);
             this.groupBox1.Controls.Add(this.groupBoxNabywca);
             this.groupBox1.Controls.Add(this.groupBoxSprzedawca);
             this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1138, 770);
+            this.groupBox1.Size = new System.Drawing.Size(1138, 815);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dane faktury";
             // 
             // textBoxSzukaj
             // 
-            this.textBoxSzukaj.Location = new System.Drawing.Point(12, 625);
+            this.textBoxSzukaj.Location = new System.Drawing.Point(12, 660);
             this.textBoxSzukaj.Name = "textBoxSzukaj";
             this.textBoxSzukaj.Size = new System.Drawing.Size(168, 23);
             this.textBoxSzukaj.TabIndex = 11;
@@ -178,16 +179,16 @@ namespace FakturniakUI
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 650);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 685);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(415, 114);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(415, 123);
             this.flowLayoutPanel1.TabIndex = 10;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(466, 646);
+            this.tabControl1.Location = new System.Drawing.Point(466, 690);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(252, 118);
@@ -235,7 +236,7 @@ namespace FakturniakUI
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(144, 598);
+            this.button2.Location = new System.Drawing.Point(144, 631);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(132, 23);
             this.button2.TabIndex = 9;
@@ -244,7 +245,7 @@ namespace FakturniakUI
             // 
             // buttonDodajProduktUsluge
             // 
-            this.buttonDodajProduktUsluge.Location = new System.Drawing.Point(6, 598);
+            this.buttonDodajProduktUsluge.Location = new System.Drawing.Point(6, 631);
             this.buttonDodajProduktUsluge.Name = "buttonDodajProduktUsluge";
             this.buttonDodajProduktUsluge.Size = new System.Drawing.Size(132, 23);
             this.buttonDodajProduktUsluge.TabIndex = 8;
@@ -252,10 +253,10 @@ namespace FakturniakUI
             this.buttonDodajProduktUsluge.UseVisualStyleBackColor = true;
             this.buttonDodajProduktUsluge.Click += new System.EventHandler(this.buttonDodajProduktUsluge_Click);
             // 
-            // dataGridView1
+            // dataGridViewMTMProdukty
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewMTMProdukty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMTMProdukty.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.lp,
             this.ProduktUsluga,
             this.jm,
@@ -265,11 +266,11 @@ namespace FakturniakUI
             this.SVAT,
             this.KVAT,
             this.WBrutto});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 296);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1126, 296);
-            this.dataGridView1.TabIndex = 3;
+            this.dataGridViewMTMProdukty.Location = new System.Drawing.Point(6, 329);
+            this.dataGridViewMTMProdukty.Name = "dataGridViewMTMProdukty";
+            this.dataGridViewMTMProdukty.RowTemplate.Height = 25;
+            this.dataGridViewMTMProdukty.Size = new System.Drawing.Size(1126, 296);
+            this.dataGridViewMTMProdukty.TabIndex = 3;
             // 
             // lp
             // 
@@ -328,7 +329,7 @@ namespace FakturniakUI
             this.groupBoxInformacje.Controls.Add(this.pictureBox1);
             this.groupBoxInformacje.Controls.Add(this.maskedTextBox3);
             this.groupBoxInformacje.Controls.Add(this.label8);
-            this.groupBoxInformacje.Controls.Add(this.comboBox1);
+            this.groupBoxInformacje.Controls.Add(this.comboBoxMetodyPlatnosci);
             this.groupBoxInformacje.Controls.Add(this.dateTimePicker4);
             this.groupBoxInformacje.Controls.Add(this.label7);
             this.groupBoxInformacje.Controls.Add(this.label6);
@@ -372,13 +373,13 @@ namespace FakturniakUI
             this.label8.TabIndex = 33;
             this.label8.Text = "Numer konta";
             // 
-            // comboBox1
+            // comboBoxMetodyPlatnosci
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(231, 124);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(183, 23);
-            this.comboBox1.TabIndex = 32;
+            this.comboBoxMetodyPlatnosci.FormattingEnabled = true;
+            this.comboBoxMetodyPlatnosci.Location = new System.Drawing.Point(231, 124);
+            this.comboBoxMetodyPlatnosci.Name = "comboBoxMetodyPlatnosci";
+            this.comboBoxMetodyPlatnosci.Size = new System.Drawing.Size(183, 23);
+            this.comboBoxMetodyPlatnosci.TabIndex = 32;
             // 
             // dateTimePicker4
             // 
@@ -472,48 +473,40 @@ namespace FakturniakUI
             // groupBoxNabywca
             // 
             this.groupBoxNabywca.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBoxNabywca.Controls.Add(this.panel4);
-            this.groupBoxNabywca.Controls.Add(this.panel5);
-            this.groupBoxNabywca.Controls.Add(this.textBoxNIMIE);
-            this.groupBoxNabywca.Controls.Add(this.LabelNImie);
-            this.groupBoxNabywca.Controls.Add(this.LabelNNazwa);
-            this.groupBoxNabywca.Controls.Add(this.textBoxNNAZWA);
-            this.groupBoxNabywca.Controls.Add(this.panel6);
+            this.groupBoxNabywca.Controls.Add(this.buttonWybierz);
+            this.groupBoxNabywca.Controls.Add(this.panelNabywca3);
+            this.groupBoxNabywca.Controls.Add(this.panelNabywca2);
+            this.groupBoxNabywca.Controls.Add(this.panelNabywca1);
             this.groupBoxNabywca.Location = new System.Drawing.Point(789, 22);
             this.groupBoxNabywca.Name = "groupBoxNabywca";
-            this.groupBoxNabywca.Size = new System.Drawing.Size(343, 268);
+            this.groupBoxNabywca.Size = new System.Drawing.Size(343, 297);
             this.groupBoxNabywca.TabIndex = 1;
             this.groupBoxNabywca.TabStop = false;
             this.groupBoxNabywca.Text = "Nabywca";
             // 
-            // panel4
+            // buttonWybierz
             // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.maskedTextBox2);
-            this.panel4.Controls.Add(this.textBox12);
-            this.panel4.Controls.Add(this.LabelNMiasto);
-            this.panel4.Controls.Add(this.LabelNAdres);
-            this.panel4.Controls.Add(this.textBox11);
-            this.panel4.Controls.Add(this.LabelNKodPocztowy);
-            this.panel4.Location = new System.Drawing.Point(6, 165);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(329, 95);
-            this.panel4.TabIndex = 28;
+            this.buttonWybierz.Location = new System.Drawing.Point(100, 266);
+            this.buttonWybierz.Name = "buttonWybierz";
+            this.buttonWybierz.Size = new System.Drawing.Size(132, 23);
+            this.buttonWybierz.TabIndex = 30;
+            this.buttonWybierz.Text = "Wybierz odbiorcę...";
+            this.buttonWybierz.UseVisualStyleBackColor = true;
+            this.buttonWybierz.Click += new System.EventHandler(this.buttonWybierz_Click);
             // 
-            // maskedTextBox2
+            // panelNabywca3
             // 
-            this.maskedTextBox2.Location = new System.Drawing.Point(152, 66);
-            this.maskedTextBox2.Mask = "00-000";
-            this.maskedTextBox2.Name = "maskedTextBox2";
-            this.maskedTextBox2.Size = new System.Drawing.Size(51, 23);
-            this.maskedTextBox2.TabIndex = 17;
-            // 
-            // textBox12
-            // 
-            this.textBox12.Location = new System.Drawing.Point(81, 8);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(189, 23);
-            this.textBox12.TabIndex = 12;
+            this.panelNabywca3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNabywca3.Controls.Add(this.LabelNMiasto);
+            this.panelNabywca3.Controls.Add(this.LabelNAdres);
+            this.panelNabywca3.Controls.Add(this.LabelNKodPocztowy);
+            this.panelNabywca3.Controls.Add(this.maskedTextBoxKodPocztowy);
+            this.panelNabywca3.Controls.Add(this.textBoxNAdres);
+            this.panelNabywca3.Controls.Add(this.textBoxNMiasto);
+            this.panelNabywca3.Location = new System.Drawing.Point(6, 165);
+            this.panelNabywca3.Name = "panelNabywca3";
+            this.panelNabywca3.Size = new System.Drawing.Size(329, 95);
+            this.panelNabywca3.TabIndex = 28;
             // 
             // LabelNMiasto
             // 
@@ -537,13 +530,6 @@ namespace FakturniakUI
             this.LabelNAdres.TabIndex = 11;
             this.LabelNAdres.Text = "Adres";
             // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(81, 37);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(189, 23);
-            this.textBox11.TabIndex = 15;
-            // 
             // LabelNKodPocztowy
             // 
             this.LabelNKodPocztowy.AccessibleDescription = "";
@@ -555,135 +541,147 @@ namespace FakturniakUI
             this.LabelNKodPocztowy.TabIndex = 13;
             this.LabelNKodPocztowy.Text = "Kod pocztowy";
             // 
-            // panel5
+            // maskedTextBoxKodPocztowy
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.checkBoxNREGON);
-            this.panel5.Controls.Add(this.checkBoxNKRS);
-            this.panel5.Controls.Add(this.checkBoxNNIP);
-            this.panel5.Controls.Add(this.checkBoxNPESEL);
-            this.panel5.Controls.Add(this.textBoxNPESEL);
-            this.panel5.Controls.Add(this.textBoxNREGON);
-            this.panel5.Controls.Add(this.textBoxNNIP);
-            this.panel5.Controls.Add(this.textBoxNKRS);
-            this.panel5.Location = new System.Drawing.Point(6, 88);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(329, 71);
-            this.panel5.TabIndex = 29;
+            this.maskedTextBoxKodPocztowy.Location = new System.Drawing.Point(152, 66);
+            this.maskedTextBoxKodPocztowy.Mask = "00-000";
+            this.maskedTextBoxKodPocztowy.Name = "maskedTextBoxKodPocztowy";
+            this.maskedTextBoxKodPocztowy.Size = new System.Drawing.Size(51, 23);
+            this.maskedTextBoxKodPocztowy.TabIndex = 17;
             // 
-            // checkBoxNREGON
+            // textBoxNAdres
             // 
-            this.checkBoxNREGON.AutoSize = true;
-            this.checkBoxNREGON.Location = new System.Drawing.Point(160, 42);
-            this.checkBoxNREGON.Name = "checkBoxNREGON";
-            this.checkBoxNREGON.Size = new System.Drawing.Size(65, 19);
-            this.checkBoxNREGON.TabIndex = 32;
-            this.checkBoxNREGON.Text = "REGON";
-            this.checkBoxNREGON.UseVisualStyleBackColor = true;
+            this.textBoxNAdres.Location = new System.Drawing.Point(81, 8);
+            this.textBoxNAdres.Name = "textBoxNAdres";
+            this.textBoxNAdres.Size = new System.Drawing.Size(189, 23);
+            this.textBoxNAdres.TabIndex = 12;
             // 
-            // checkBoxNKRS
+            // textBoxNMiasto
             // 
-            this.checkBoxNKRS.AutoSize = true;
-            this.checkBoxNKRS.Location = new System.Drawing.Point(160, 13);
-            this.checkBoxNKRS.Name = "checkBoxNKRS";
-            this.checkBoxNKRS.Size = new System.Drawing.Size(46, 19);
-            this.checkBoxNKRS.TabIndex = 31;
-            this.checkBoxNKRS.Text = "KRS";
-            this.checkBoxNKRS.UseVisualStyleBackColor = true;
+            this.textBoxNMiasto.Location = new System.Drawing.Point(81, 37);
+            this.textBoxNMiasto.Name = "textBoxNMiasto";
+            this.textBoxNMiasto.Size = new System.Drawing.Size(189, 23);
+            this.textBoxNMiasto.TabIndex = 15;
             // 
-            // checkBoxNNIP
+            // panelNabywca2
             // 
-            this.checkBoxNNIP.AutoSize = true;
-            this.checkBoxNNIP.Location = new System.Drawing.Point(7, 40);
-            this.checkBoxNNIP.Name = "checkBoxNNIP";
-            this.checkBoxNNIP.Size = new System.Drawing.Size(45, 19);
-            this.checkBoxNNIP.TabIndex = 30;
-            this.checkBoxNNIP.Text = "NIP";
-            this.checkBoxNNIP.UseVisualStyleBackColor = true;
+            this.panelNabywca2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNabywca2.Controls.Add(this.checkBoxNNumery4);
+            this.panelNabywca2.Controls.Add(this.checkBoxNNumery3);
+            this.panelNabywca2.Controls.Add(this.checkBoxNNumery2);
+            this.panelNabywca2.Controls.Add(this.checkBoxNNumery1);
+            this.panelNabywca2.Controls.Add(this.textBoxNNumery1);
+            this.panelNabywca2.Controls.Add(this.textBoxNNumery4);
+            this.panelNabywca2.Controls.Add(this.textBoxNNumery2);
+            this.panelNabywca2.Controls.Add(this.textBoxNNumery3);
+            this.panelNabywca2.Location = new System.Drawing.Point(6, 88);
+            this.panelNabywca2.Name = "panelNabywca2";
+            this.panelNabywca2.Size = new System.Drawing.Size(329, 71);
+            this.panelNabywca2.TabIndex = 29;
             // 
-            // checkBoxNPESEL
+            // checkBoxNNumery4
             // 
-            this.checkBoxNPESEL.AutoSize = true;
-            this.checkBoxNPESEL.Location = new System.Drawing.Point(7, 11);
-            this.checkBoxNPESEL.Name = "checkBoxNPESEL";
-            this.checkBoxNPESEL.Size = new System.Drawing.Size(57, 19);
-            this.checkBoxNPESEL.TabIndex = 29;
-            this.checkBoxNPESEL.Text = "PESEL";
-            this.checkBoxNPESEL.UseVisualStyleBackColor = true;
+            this.checkBoxNNumery4.AutoSize = true;
+            this.checkBoxNNumery4.Location = new System.Drawing.Point(160, 42);
+            this.checkBoxNNumery4.Name = "checkBoxNNumery4";
+            this.checkBoxNNumery4.Size = new System.Drawing.Size(65, 19);
+            this.checkBoxNNumery4.TabIndex = 32;
+            this.checkBoxNNumery4.Text = "REGON";
+            this.checkBoxNNumery4.UseVisualStyleBackColor = true;
             // 
-            // textBoxNPESEL
+            // checkBoxNNumery3
             // 
-            this.textBoxNPESEL.Location = new System.Drawing.Point(70, 9);
-            this.textBoxNPESEL.Name = "textBoxNPESEL";
-            this.textBoxNPESEL.Size = new System.Drawing.Size(74, 23);
-            this.textBoxNPESEL.TabIndex = 27;
+            this.checkBoxNNumery3.AutoSize = true;
+            this.checkBoxNNumery3.Location = new System.Drawing.Point(160, 13);
+            this.checkBoxNNumery3.Name = "checkBoxNNumery3";
+            this.checkBoxNNumery3.Size = new System.Drawing.Size(46, 19);
+            this.checkBoxNNumery3.TabIndex = 31;
+            this.checkBoxNNumery3.Text = "KRS";
+            this.checkBoxNNumery3.UseVisualStyleBackColor = true;
             // 
-            // textBoxNREGON
+            // checkBoxNNumery2
             // 
-            this.textBoxNREGON.Location = new System.Drawing.Point(226, 40);
-            this.textBoxNREGON.Name = "textBoxNREGON";
-            this.textBoxNREGON.Size = new System.Drawing.Size(95, 23);
-            this.textBoxNREGON.TabIndex = 23;
+            this.checkBoxNNumery2.AutoSize = true;
+            this.checkBoxNNumery2.Location = new System.Drawing.Point(7, 40);
+            this.checkBoxNNumery2.Name = "checkBoxNNumery2";
+            this.checkBoxNNumery2.Size = new System.Drawing.Size(45, 19);
+            this.checkBoxNNumery2.TabIndex = 30;
+            this.checkBoxNNumery2.Text = "NIP";
+            this.checkBoxNNumery2.UseVisualStyleBackColor = true;
             // 
-            // textBoxNNIP
+            // checkBoxNNumery1
             // 
-            this.textBoxNNIP.Location = new System.Drawing.Point(70, 40);
-            this.textBoxNNIP.Name = "textBoxNNIP";
-            this.textBoxNNIP.Size = new System.Drawing.Size(74, 23);
-            this.textBoxNNIP.TabIndex = 25;
+            this.checkBoxNNumery1.AutoSize = true;
+            this.checkBoxNNumery1.Location = new System.Drawing.Point(7, 11);
+            this.checkBoxNNumery1.Name = "checkBoxNNumery1";
+            this.checkBoxNNumery1.Size = new System.Drawing.Size(57, 19);
+            this.checkBoxNNumery1.TabIndex = 29;
+            this.checkBoxNNumery1.Text = "PESEL";
+            this.checkBoxNNumery1.UseVisualStyleBackColor = true;
             // 
-            // textBoxNKRS
+            // textBoxNNumery1
             // 
-            this.textBoxNKRS.Location = new System.Drawing.Point(226, 9);
-            this.textBoxNKRS.Name = "textBoxNKRS";
-            this.textBoxNKRS.Size = new System.Drawing.Size(95, 23);
-            this.textBoxNKRS.TabIndex = 10;
+            this.textBoxNNumery1.Location = new System.Drawing.Point(70, 9);
+            this.textBoxNNumery1.Name = "textBoxNNumery1";
+            this.textBoxNNumery1.Size = new System.Drawing.Size(74, 23);
+            this.textBoxNNumery1.TabIndex = 27;
             // 
-            // textBoxNIMIE
+            // textBoxNNumery4
             // 
-            this.textBoxNIMIE.Location = new System.Drawing.Point(58, 22);
-            this.textBoxNIMIE.Name = "textBoxNIMIE";
-            this.textBoxNIMIE.Size = new System.Drawing.Size(81, 23);
-            this.textBoxNIMIE.TabIndex = 20;
+            this.textBoxNNumery4.Location = new System.Drawing.Point(226, 40);
+            this.textBoxNNumery4.Name = "textBoxNNumery4";
+            this.textBoxNNumery4.Size = new System.Drawing.Size(95, 23);
+            this.textBoxNNumery4.TabIndex = 23;
             // 
-            // LabelNImie
+            // textBoxNNumery2
             // 
-            this.LabelNImie.AccessibleDescription = "";
-            this.LabelNImie.AccessibleName = "NImie";
-            this.LabelNImie.AutoSize = true;
-            this.LabelNImie.Location = new System.Drawing.Point(10, 25);
-            this.LabelNImie.Name = "LabelNImie";
-            this.LabelNImie.Size = new System.Drawing.Size(30, 15);
-            this.LabelNImie.TabIndex = 18;
-            this.LabelNImie.Text = "Imię";
+            this.textBoxNNumery2.Location = new System.Drawing.Point(70, 40);
+            this.textBoxNNumery2.Name = "textBoxNNumery2";
+            this.textBoxNNumery2.Size = new System.Drawing.Size(74, 23);
+            this.textBoxNNumery2.TabIndex = 25;
+            // 
+            // textBoxNNumery3
+            // 
+            this.textBoxNNumery3.Location = new System.Drawing.Point(226, 9);
+            this.textBoxNNumery3.Name = "textBoxNNumery3";
+            this.textBoxNNumery3.Size = new System.Drawing.Size(95, 23);
+            this.textBoxNNumery3.TabIndex = 10;
+            // 
+            // panelNabywca1
+            // 
+            this.panelNabywca1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNabywca1.Controls.Add(this.LabelNNazwa);
+            this.panelNabywca1.Controls.Add(this.LabelNImie);
+            this.panelNabywca1.Controls.Add(this.LabelNNazwisko);
+            this.panelNabywca1.Controls.Add(this.textBoxNNAZWA);
+            this.panelNabywca1.Controls.Add(this.textBoxNIMIE);
+            this.panelNabywca1.Controls.Add(this.textBoxNNAZWISKO);
+            this.panelNabywca1.Location = new System.Drawing.Point(6, 16);
+            this.panelNabywca1.Name = "panelNabywca1";
+            this.panelNabywca1.Size = new System.Drawing.Size(329, 66);
+            this.panelNabywca1.TabIndex = 28;
             // 
             // LabelNNazwa
             // 
             this.LabelNNazwa.AccessibleDescription = "";
             this.LabelNNazwa.AccessibleName = "NNazwa";
             this.LabelNNazwa.AutoSize = true;
-            this.LabelNNazwa.Location = new System.Drawing.Point(10, 54);
+            this.LabelNNazwa.Location = new System.Drawing.Point(7, 37);
             this.LabelNNazwa.Name = "LabelNNazwa";
             this.LabelNNazwa.Size = new System.Drawing.Size(42, 15);
             this.LabelNNazwa.TabIndex = 8;
             this.LabelNNazwa.Text = "Nazwa";
             // 
-            // textBoxNNAZWA
+            // LabelNImie
             // 
-            this.textBoxNNAZWA.Location = new System.Drawing.Point(58, 51);
-            this.textBoxNNAZWA.Name = "textBoxNNAZWA";
-            this.textBoxNNAZWA.Size = new System.Drawing.Size(270, 23);
-            this.textBoxNNAZWA.TabIndex = 7;
-            // 
-            // panel6
-            // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.LabelNNazwisko);
-            this.panel6.Controls.Add(this.textBoxNNAZWISKO);
-            this.panel6.Location = new System.Drawing.Point(6, 16);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(329, 66);
-            this.panel6.TabIndex = 28;
+            this.LabelNImie.AccessibleDescription = "";
+            this.LabelNImie.AccessibleName = "NImie";
+            this.LabelNImie.AutoSize = true;
+            this.LabelNImie.Location = new System.Drawing.Point(7, 8);
+            this.LabelNImie.Name = "LabelNImie";
+            this.LabelNImie.Size = new System.Drawing.Size(30, 15);
+            this.LabelNImie.TabIndex = 18;
+            this.LabelNImie.Text = "Imię";
             // 
             // LabelNNazwisko
             // 
@@ -695,6 +693,20 @@ namespace FakturniakUI
             this.LabelNNazwisko.Size = new System.Drawing.Size(57, 15);
             this.LabelNNazwisko.TabIndex = 19;
             this.LabelNNazwisko.Text = "Nazwisko";
+            // 
+            // textBoxNNAZWA
+            // 
+            this.textBoxNNAZWA.Location = new System.Drawing.Point(51, 34);
+            this.textBoxNNAZWA.Name = "textBoxNNAZWA";
+            this.textBoxNNAZWA.Size = new System.Drawing.Size(270, 23);
+            this.textBoxNNAZWA.TabIndex = 7;
+            // 
+            // textBoxNIMIE
+            // 
+            this.textBoxNIMIE.Location = new System.Drawing.Point(51, 5);
+            this.textBoxNIMIE.Name = "textBoxNIMIE";
+            this.textBoxNIMIE.Size = new System.Drawing.Size(81, 23);
+            this.textBoxNIMIE.TabIndex = 20;
             // 
             // textBoxNNAZWISKO
             // 
@@ -796,10 +808,10 @@ namespace FakturniakUI
             this.panel2.Controls.Add(this.checkBoxSKRS);
             this.panel2.Controls.Add(this.checkBoxSNIP);
             this.panel2.Controls.Add(this.checkBoxSPESEL);
-            this.panel2.Controls.Add(this.textBoxSPESEL);
-            this.panel2.Controls.Add(this.textBoxSREGON);
-            this.panel2.Controls.Add(this.textBoxSNIP);
-            this.panel2.Controls.Add(this.textBoxSKRS);
+            this.panel2.Controls.Add(this.textBoxSNumery1);
+            this.panel2.Controls.Add(this.textBoxSNumery4);
+            this.panel2.Controls.Add(this.textBoxSNumery2);
+            this.panel2.Controls.Add(this.textBoxSNumery3);
             this.panel2.Location = new System.Drawing.Point(6, 88);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(335, 71);
@@ -845,33 +857,33 @@ namespace FakturniakUI
             this.checkBoxSPESEL.Text = "PESEL";
             this.checkBoxSPESEL.UseVisualStyleBackColor = true;
             // 
-            // textBoxSPESEL
+            // textBoxSNumery1
             // 
-            this.textBoxSPESEL.Location = new System.Drawing.Point(69, 9);
-            this.textBoxSPESEL.Name = "textBoxSPESEL";
-            this.textBoxSPESEL.Size = new System.Drawing.Size(74, 23);
-            this.textBoxSPESEL.TabIndex = 27;
+            this.textBoxSNumery1.Location = new System.Drawing.Point(69, 9);
+            this.textBoxSNumery1.Name = "textBoxSNumery1";
+            this.textBoxSNumery1.Size = new System.Drawing.Size(74, 23);
+            this.textBoxSNumery1.TabIndex = 27;
             // 
-            // textBoxSREGON
+            // textBoxSNumery4
             // 
-            this.textBoxSREGON.Location = new System.Drawing.Point(229, 40);
-            this.textBoxSREGON.Name = "textBoxSREGON";
-            this.textBoxSREGON.Size = new System.Drawing.Size(95, 23);
-            this.textBoxSREGON.TabIndex = 23;
+            this.textBoxSNumery4.Location = new System.Drawing.Point(229, 40);
+            this.textBoxSNumery4.Name = "textBoxSNumery4";
+            this.textBoxSNumery4.Size = new System.Drawing.Size(95, 23);
+            this.textBoxSNumery4.TabIndex = 23;
             // 
-            // textBoxSNIP
+            // textBoxSNumery2
             // 
-            this.textBoxSNIP.Location = new System.Drawing.Point(69, 40);
-            this.textBoxSNIP.Name = "textBoxSNIP";
-            this.textBoxSNIP.Size = new System.Drawing.Size(74, 23);
-            this.textBoxSNIP.TabIndex = 25;
+            this.textBoxSNumery2.Location = new System.Drawing.Point(69, 40);
+            this.textBoxSNumery2.Name = "textBoxSNumery2";
+            this.textBoxSNumery2.Size = new System.Drawing.Size(74, 23);
+            this.textBoxSNumery2.TabIndex = 25;
             // 
-            // textBoxSKRS
+            // textBoxSNumery3
             // 
-            this.textBoxSKRS.Location = new System.Drawing.Point(229, 9);
-            this.textBoxSKRS.Name = "textBoxSKRS";
-            this.textBoxSKRS.Size = new System.Drawing.Size(95, 23);
-            this.textBoxSKRS.TabIndex = 10;
+            this.textBoxSNumery3.Location = new System.Drawing.Point(229, 9);
+            this.textBoxSNumery3.Name = "textBoxSNumery3";
+            this.textBoxSNumery3.Size = new System.Drawing.Size(95, 23);
+            this.textBoxSNumery3.TabIndex = 10;
             // 
             // textBoxSIMIE
             // 
@@ -975,7 +987,7 @@ namespace FakturniakUI
             // 
             // Wystaw
             // 
-            this.Wystaw.Location = new System.Drawing.Point(504, 820);
+            this.Wystaw.Location = new System.Drawing.Point(504, 865);
             this.Wystaw.Name = "Wystaw";
             this.Wystaw.Size = new System.Drawing.Size(141, 23);
             this.Wystaw.TabIndex = 2;
@@ -986,7 +998,7 @@ namespace FakturniakUI
             // label9
             // 
             this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.Location = new System.Drawing.Point(15, 815);
+            this.label9.Location = new System.Drawing.Point(12, 860);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(1138, 2);
             this.label9.TabIndex = 7;
@@ -996,7 +1008,7 @@ namespace FakturniakUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1162, 846);
+            this.ClientSize = new System.Drawing.Size(1162, 891);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.Wystaw);
@@ -1013,18 +1025,17 @@ namespace FakturniakUI
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMTMProdukty)).EndInit();
             this.groupBoxInformacje.ResumeLayout(false);
             this.groupBoxInformacje.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBoxNabywca.ResumeLayout(false);
-            this.groupBoxNabywca.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            this.panelNabywca3.ResumeLayout(false);
+            this.panelNabywca3.PerformLayout();
+            this.panelNabywca2.ResumeLayout(false);
+            this.panelNabywca2.PerformLayout();
+            this.panelNabywca1.ResumeLayout(false);
+            this.panelNabywca1.PerformLayout();
             this.groupBoxSprzedawca.ResumeLayout(false);
             this.groupBoxSprzedawca.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -1060,37 +1071,37 @@ namespace FakturniakUI
         private System.Windows.Forms.Label LabelSKodPocztowy;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label LabelSAdres;
-        private System.Windows.Forms.TextBox textBoxSKRS;
-        private System.Windows.Forms.TextBox textBoxSREGON;
-        private System.Windows.Forms.TextBox textBoxSPESEL;
-        private System.Windows.Forms.TextBox textBoxSNIP;
+        private System.Windows.Forms.TextBox textBoxSNumery3;
+        private System.Windows.Forms.TextBox textBoxSNumery4;
+        private System.Windows.Forms.TextBox textBoxSNumery1;
+        private System.Windows.Forms.TextBox textBoxSNumery2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBoxNabywca;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
+        private System.Windows.Forms.MaskedTextBox maskedTextBoxKodPocztowy;
         private System.Windows.Forms.Label LabelNMiasto;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBoxNMiasto;
         private System.Windows.Forms.Label LabelNKodPocztowy;
-        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBoxNAdres;
         private System.Windows.Forms.Label LabelNAdres;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox textBoxNPESEL;
-        private System.Windows.Forms.TextBox textBoxNREGON;
-        private System.Windows.Forms.TextBox textBoxNNIP;
-        private System.Windows.Forms.TextBox textBoxNKRS;
+        private System.Windows.Forms.Panel panelNabywca3;
+        private System.Windows.Forms.Panel panelNabywca2;
+        private System.Windows.Forms.TextBox textBoxNNumery1;
+        private System.Windows.Forms.TextBox textBoxNNumery4;
+        private System.Windows.Forms.TextBox textBoxNNumery2;
+        private System.Windows.Forms.TextBox textBoxNNumery3;
         private System.Windows.Forms.TextBox textBoxNNAZWISKO;
         private System.Windows.Forms.TextBox textBoxNIMIE;
         private System.Windows.Forms.Label LabelNImie;
         private System.Windows.Forms.Label LabelNNazwa;
         private System.Windows.Forms.TextBox textBoxNNAZWA;
         private System.Windows.Forms.Label LabelNNazwisko;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.CheckBox checkBoxNREGON;
-        private System.Windows.Forms.CheckBox checkBoxNKRS;
-        private System.Windows.Forms.CheckBox checkBoxNNIP;
-        private System.Windows.Forms.CheckBox checkBoxNPESEL;
+        private System.Windows.Forms.Panel panelNabywca1;
+        private System.Windows.Forms.CheckBox checkBoxNNumery4;
+        private System.Windows.Forms.CheckBox checkBoxNNumery3;
+        private System.Windows.Forms.CheckBox checkBoxNNumery2;
+        private System.Windows.Forms.CheckBox checkBoxNNumery1;
         private System.Windows.Forms.CheckBox checkBoxSREGON;
         private System.Windows.Forms.CheckBox checkBoxSKRS;
         private System.Windows.Forms.CheckBox checkBoxSNIP;
@@ -1104,12 +1115,12 @@ namespace FakturniakUI
         private System.Windows.Forms.TextBox textBox20;
         private System.Windows.Forms.MaskedTextBox maskedTextBox3;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxMetodyPlatnosci;
         private System.Windows.Forms.DateTimePicker dateTimePicker4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewMTMProdukty;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button buttonDodajProduktUsluge;
@@ -1129,5 +1140,6 @@ namespace FakturniakUI
         private System.Windows.Forms.DataGridViewTextBoxColumn SVAT;
         private System.Windows.Forms.DataGridViewTextBoxColumn KVAT;
         private System.Windows.Forms.DataGridViewTextBoxColumn WBrutto;
+        private System.Windows.Forms.Button buttonWybierz;
     }
 }

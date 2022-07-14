@@ -14,6 +14,7 @@ namespace FakturniakUI
     {
         readonly ISqlDataAccess dataAccess = new SqlDataAccess();
 
+        ModelKontrahent nabywca = new ModelKontrahent();
 
         //List<ModelKontrahent> sprzedawcy;
         //List<ModelKontrahent> nabywcy;
@@ -30,6 +31,14 @@ namespace FakturniakUI
             IDataProdukty dataProdukty = new DataProdukty(dataAccess);
             await Task.Run(() => produkty = dataProdukty.Get().Result.ToList());
 
+            List<ModelSposobPlatnosci> sposobyPlatnosci = new List<ModelSposobPlatnosci>();
+            IDataSposobyPlatnosci dataSposobyPlatnosci = new DataSposobyPlatnosci(dataAccess);
+            await Task.Run(() => sposobyPlatnosci = dataSposobyPlatnosci.Get().Result.ToList());
+
+            foreach (ModelSposobPlatnosci spPlatnosci in sposobyPlatnosci)
+            {
+                comboBoxMetodyPlatnosci.Items.Add(spPlatnosci.nazwa);
+            }
 
             populateProdukty();
         }
@@ -120,7 +129,7 @@ namespace FakturniakUI
                     bool addRowNeeded = true;
 
 
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    foreach (DataGridViewRow row in dataGridViewMTMProdukty.Rows)
                     {
 
                         // haha, męczyłem się nad tym z 1,5 godziny, wystarczyło
@@ -147,7 +156,7 @@ namespace FakturniakUI
                                                 "kwotavat2test",
                                                 "wbruttotest"};
 
-                        this.dataGridView1.Rows.Add(rowArrToAdd);
+                        this.dataGridViewMTMProdukty.Rows.Add(rowArrToAdd);
                     }
 
 
@@ -175,5 +184,36 @@ namespace FakturniakUI
         private void textBoxSzukaj_TextChanged(object sender, EventArgs e) => performSearch(textBoxSzukaj.Text);
 
         private void buttonDodajProduktUsluge_Click(object sender, EventArgs e) => DodajDoFaktury();
+
+        private void buttonWybierz_Click(object sender, EventArgs e)
+        {
+            using (FormSzukaj formSzukaj = new FormSzukaj("Kontrahenci"))
+            {
+                var result = formSzukaj.ShowDialog();
+
+                if(result == DialogResult.OK)
+                {
+                    nabywca = formSzukaj.returnModelKontrahent;
+                    formSzukaj.Dispose();
+                }
+            }
+
+            textBoxNIMIE.Text = nabywca.imie;
+            textBoxNNAZWISKO.Text = nabywca.nazwisko;
+            textBoxNNAZWA.Text = nabywca.nazwa;
+            textBoxNNumery1.Text = nabywca.pesel;
+            textBoxNNumery2.Text = nabywca.nip;
+            textBoxNNumery3.Text = nabywca.krs;
+            textBoxNNumery4.Text = nabywca.regon;
+            textBoxNAdres.Text = nabywca.adres;
+            textBoxNMiasto.Text = nabywca.miasto;
+            maskedTextBoxKodPocztowy.Text = nabywca.kod_pocztowy;
+
+            // 14.07 : skonczyles tutaj
+
+            panelNabywca1.Enabled = false;
+            panelNabywca2.Enabled = false;
+            panelNabywca3.Enabled = false;
+        }
     }
 }
