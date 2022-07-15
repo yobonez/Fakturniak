@@ -16,11 +16,16 @@ namespace FakturniakUI
         {
             InitializeComponent();
         }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.CenterToScreen();
+        }
 
         private void NowaFaktura_Click(object sender, EventArgs e)
         {
             FormFaktura formFaktura = new FormFaktura();
             formFaktura.Show();
         }
+
     }
 }

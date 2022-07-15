@@ -17,5 +17,7 @@ namespace FakturniakDataAccess.Models
         public int id_sposob_platnosci { get; set; }
         public DateTime termin_platnosci { get; set; }
         public int id_typu_faktury { get; set; }
+        public string uwagi { get; set; }
+        public string uwagi_wewnetrzne { get; set; }
     }
 }

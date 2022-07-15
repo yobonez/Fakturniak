@@ -14,12 +14,27 @@ namespace FakturniakUI
     {
         readonly ISqlDataAccess dataAccess = new SqlDataAccess();
 
+        /// <summary>
+        /// Sekcja gotowych danych, które mają być zatwierdzone po kliknięciu "Wystaw"
+        /// </summary>
+
+        DateTime data_wystawienia = new DateTime();
+        DateTime data_wykonania = new DateTime();
+        DateTime termin_platnosci = new DateTime();
+
         ModelKontrahent nabywca = new ModelKontrahent();
 
-        //List<ModelKontrahent> sprzedawcy;
-        //List<ModelKontrahent> nabywcy;
+        ModelSposobPlatnosci sposob_platnosci = new ModelSposobPlatnosci();
+        List<ModelMTMFakturaProdukt> produktyFaktura = new List<ModelMTMFakturaProdukt>();
+
+        Decimal do_zaplaty = 0.00M;
+        /// <summary>
+        /// Koniec sekcji danych do zatwierdzenia
+        /// </summary>
+
 
         List<ModelProdukt> produkty;
+        List<ModelSposobPlatnosci> sposoby_platnosci = new List<ModelSposobPlatnosci>();
 
         public FormFaktura()
         {
@@ -27,15 +42,18 @@ namespace FakturniakUI
         }
 
         private async void FormFaktura_Load(object sender, EventArgs e)
-        {
+        { 
+            this.CenterToParent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+
             IDataProdukty dataProdukty = new DataProdukty(dataAccess);
             await Task.Run(() => produkty = dataProdukty.Get().Result.ToList());
 
-            List<ModelSposobPlatnosci> sposobyPlatnosci = new List<ModelSposobPlatnosci>();
             IDataSposobyPlatnosci dataSposobyPlatnosci = new DataSposobyPlatnosci(dataAccess);
-            await Task.Run(() => sposobyPlatnosci = dataSposobyPlatnosci.Get().Result.ToList());
+            await Task.Run(() => sposoby_platnosci = dataSposobyPlatnosci.Get().Result.ToList());
 
-            foreach (ModelSposobPlatnosci spPlatnosci in sposobyPlatnosci)
+            foreach (ModelSposobPlatnosci spPlatnosci in sposoby_platnosci)
             {
                 comboBoxMetodyPlatnosci.Items.Add(spPlatnosci.nazwa);
             }
@@ -77,8 +95,6 @@ namespace FakturniakUI
 
         private async void performSearch(string textInput)
         {
-            // Memory leak fdfhadfhdafahfdafrdfadsaads
-
             this.flowLayoutPanel1.Controls.Clear();
 
             List<ModelProdukt> tempSearchProdukty = new() { };
@@ -121,48 +137,97 @@ namespace FakturniakUI
                     IDataStawkiVAT dataStawkiVAT = new DataStawkiVAT(dataAccess);
                     IDataJednostkiMiary dataJednostkiMiary = new DataJednostkiMiary(dataAccess);
 
-                    int ilosc = 1;
+                    int _ilosc = 1;
 
                     await Task.Run(() => tempStawkaVAT = dataStawkiVAT.Load(child_control.id_stawki).Result);
                     await Task.Run(() => tempJednostkaMiary = dataJednostkiMiary.Load(child_control.id_jednostki).Result);
 
                     bool addRowNeeded = true;
 
-
                     foreach (DataGridViewRow row in dataGridViewMTMProdukty.Rows)
                     {
-
-                        // haha, męczyłem się nad tym z 1,5 godziny, wystarczyło
-                        // głupi pytajnik postawić
                         if (row.Cells[1].Value?.ToString() == child_control.nazwa)
                         {
                             addRowNeeded = false;
 
-                            ilosc = Int32.Parse(row.Cells["Ilosc"].Value.ToString());
-                            ilosc++;
-                            row.Cells["Ilosc"].Value = ilosc;
+                            _ilosc = Int32.Parse(row.Cells["Ilosc"].Value.ToString());
+                            _ilosc++;
+                            row.Cells["Ilosc"].Value = _ilosc;
                         }
                     }
 
                     if (addRowNeeded)
                     {
+                        Decimal wartosc_brutto = 0.00M;
+                        wartosc_brutto = child_control.cena_brutto * _ilosc;
+                        Decimal wartosc_vat = 0.00M;
+                        wartosc_vat = wartosc_brutto - child_control.cena_netto;
+
                         object[] rowArrToAdd = {child_control.id_produktu,
                                                 child_control.nazwa,
                                                 tempJednostkaMiary.nazwa,
-                                                ilosc,
+                                                _ilosc,
                                                 child_control.cena_netto,
                                                 child_control.cena_brutto,
                                                 tempStawkaVAT.wartosc,
-                                                "kwotavat2test",
-                                                "wbruttotest"};
+                                                wartosc_vat,
+                                                wartosc_brutto};
 
                         this.dataGridViewMTMProdukty.Rows.Add(rowArrToAdd);
                     }
-
-
                 }
             }
         }
+
+        void UsunZFaktury()
+        {
+            bool anySelected = false;
+            foreach (DataGridViewRow Row in dataGridViewMTMProdukty.SelectedRows)
+            {
+                if (Row.Cells[0].Value == null)
+                    continue;
+
+                anySelected = true;
+                dataGridViewMTMProdukty.Rows.Remove(Row);
+            }
+
+            if(!anySelected)
+            {
+                MessageBox.Show(this, "Najpierw wybierz produkty zaznaczając je poprzez kliknięcie w puste pole bez kolumny po lewej stronie.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        void UpdateProdukty()
+        {
+            foreach (DataGridViewRow Row in dataGridViewMTMProdukty.Rows)
+            {
+                if (Row.Cells[0].Value == null)
+                    continue;
+
+                int ilosc = Int32.Parse(Row.Cells["Ilosc"].Value.ToString());
+                Decimal kwota_jeden_brutto = Decimal.Parse(Row.Cells["Brutto"].Value.ToString());
+                Decimal kwota_jeden_netto = Decimal.Parse(Row.Cells["Netto"].Value.ToString());
+
+                Decimal kwota_xilosc_brutto = kwota_jeden_brutto * ilosc;
+                Decimal kwota_xilosc_netto = kwota_jeden_netto * ilosc;
+
+
+                Row.Cells["KVAT"].Value = kwota_xilosc_brutto - kwota_xilosc_netto;
+                Row.Cells["WBrutto"].Value = kwota_xilosc_brutto;
+            }
+
+            Decimal kwota_do_zaplaty = 0.00M;
+            foreach (DataGridViewRow Row in dataGridViewMTMProdukty.Rows)
+            {
+                if (Row.Cells[0].Value == null)
+                    continue;
+
+                Decimal temp_jeden_wbrutto = Decimal.Parse(Row.Cells["WBrutto"].Value.ToString());
+                kwota_do_zaplaty += temp_jeden_wbrutto;
+            }
+            labelKwota.Text = kwota_do_zaplaty.ToString();
+        }
+
 
         private void Wystaw_Click(object sender, EventArgs e)
         {
@@ -184,6 +249,7 @@ namespace FakturniakUI
         private void textBoxSzukaj_TextChanged(object sender, EventArgs e) => performSearch(textBoxSzukaj.Text);
 
         private void buttonDodajProduktUsluge_Click(object sender, EventArgs e) => DodajDoFaktury();
+        private void buttonUsunProduktUsluge_Click(object sender, EventArgs e) => UsunZFaktury();
 
         private void buttonWybierz_Click(object sender, EventArgs e)
         {
@@ -209,11 +275,37 @@ namespace FakturniakUI
             textBoxNMiasto.Text = nabywca.miasto;
             maskedTextBoxKodPocztowy.Text = nabywca.kod_pocztowy;
 
-            // 14.07 : skonczyles tutaj
-
             panelNabywca1.Enabled = false;
             panelNabywca2.Enabled = false;
             panelNabywca3.Enabled = false;
+        }
+
+        private void labelKwota_SizeChanged(object sender, EventArgs e)
+        {
+            labelPLN.Left = labelKwota.Right + 1;
+        }
+
+        //private void dataGridViewMTMProdukty_CellEndEdit(object sender, DataGridViewCellEventArgs e) => UpdateProdukty();
+
+        private void dataGridViewMTMProdukty_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) => UpdateProdukty();
+
+        private void dataGridViewMTMProdukty_CellValueChanged(object sender, DataGridViewCellEventArgs e) => UpdateProdukty();
+
+        private void dataGridViewMTMProdukty_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) => UpdateProdukty();
+
+        private void comboBoxMetodyPlatnosci_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (ModelSposobPlatnosci spPlatnosci in sposoby_platnosci)
+            {
+                if (comboBoxMetodyPlatnosci.SelectedItem == spPlatnosci.nazwa)
+                {
+                    sposob_platnosci = new ModelSposobPlatnosci
+                    {
+                        id_sposob_platnosci = spPlatnosci.id_sposob_platnosci,
+                        nazwa = spPlatnosci.nazwa
+                    };
+                }
+            }
         }
     }
 }
