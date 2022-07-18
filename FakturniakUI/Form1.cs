@@ -18,6 +18,9 @@ namespace FakturniakUI
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Todo: jezeli nie ma jeszcze zarejestrowanego wystawiającego 
+            FormRejestracja frej = new FormRejestracja();
+            frej.Show();
             this.CenterToScreen();
         }
 

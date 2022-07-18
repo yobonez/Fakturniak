@@ -417,9 +417,9 @@ namespace FakturniakUI
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(6, 22);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 18);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(408, 78);
+            this.pictureBox1.Size = new System.Drawing.Size(400, 80);
             this.pictureBox1.TabIndex = 35;
             this.pictureBox1.TabStop = false;
             // 
