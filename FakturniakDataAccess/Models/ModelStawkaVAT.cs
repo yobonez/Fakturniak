@@ -1,5 +1,4 @@
-﻿
-namespace FakturniakDataAccess.Models
+﻿namespace FakturniakDataAccess.Models
 {
     public class ModelStawkaVAT
     {

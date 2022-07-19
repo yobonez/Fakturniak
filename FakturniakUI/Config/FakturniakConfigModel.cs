@@ -16,20 +16,12 @@
     along with Fakturniak.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using FakturniakDataAccess.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace FakturniakDataAccess.Data
+namespace FakturniakUI.Config
 {
-    public interface IDataProdukty
+    public class FakturniakConfigModel
     {
-        Task Delete(int _id_produktu);
-        Task<IEnumerable<ModelProdukt>> Get();
-        Task Insert(ModelProdukt p);
-        Task InsertBrutto(ModelProdukt p);
-        Task InsertNetto(ModelProdukt p);
-        Task<IEnumerable<ModelProdukt>> Search(string _input);
-        Task<ModelProdukt> Load(int _id_produktu);
+        public int id_zarejestrowany { get; set; }
+        public string ostatni_zalogowany_uzytkownik { get; set; }
+        public string logo_path { get; set; }
     }
 }

@@ -1,12 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//  Copyright (C) 2022 Jacek Gałuszka
+/*
+    This file is part of Fakturniak.
+
+    Fakturniak is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
+
+    Fakturniak is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Fakturniak.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+using System;
 using System.Windows.Forms;
+using FakturniakUI.Config;
 
 namespace FakturniakUI
 {
@@ -18,9 +30,26 @@ namespace FakturniakUI
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Todo: jezeli nie ma jeszcze zarejestrowanego wystawiającego 
-            FormRejestracja frej = new FormRejestracja();
-            frej.Show();
+            FakturniakConfig cfg = new FakturniakConfig();
+            FakturniakConfigModel cfgModel = new FakturniakConfigModel();
+            cfgModel = cfg.Load("FakturniakConfig.xml");
+
+            if (cfgModel.id_zarejestrowany > 0)
+            {
+                using (FormLogowanie flogowanie = new FormLogowanie())
+                {
+                    flogowanie.ShowDialog();
+                }
+            }
+
+            else
+            {
+                using (FormRejestracja frejestracja = new FormRejestracja())
+                {
+                    frejestracja.ShowDialog();
+                }
+            }
+
             this.CenterToScreen();
         }
 

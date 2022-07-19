@@ -71,6 +71,7 @@ namespace FakturniakUI
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button5 = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -83,7 +84,7 @@ namespace FakturniakUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(67, 9);
+            this.label1.Location = new System.Drawing.Point(67, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(440, 30);
             this.label1.TabIndex = 0;
@@ -95,7 +96,7 @@ namespace FakturniakUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(91, 39);
+            this.label2.Location = new System.Drawing.Point(91, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(393, 21);
             this.label2.TabIndex = 1;
@@ -490,11 +491,23 @@ namespace FakturniakUI
             this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.ForeColor = System.Drawing.Color.Blue;
+            this.label19.Location = new System.Drawing.Point(128, 51);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(310, 15);
+            this.label19.TabIndex = 32;
+            this.label19.Text = "Domyślne hasło konta \"Administrator\" to $administrator$";
+            this.label19.Visible = false;
+            // 
             // FormRejestracja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 368);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button3);
@@ -506,6 +519,7 @@ namespace FakturniakUI
             this.Controls.Add(this.label1);
             this.Name = "FormRejestracja";
             this.Text = "Rejestracja";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormRejestracja_FormClosed);
             this.Load += new System.EventHandler(this.FormRejestracja_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -563,5 +577,6 @@ namespace FakturniakUI
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label19;
     }
 }
