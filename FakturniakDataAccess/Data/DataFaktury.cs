@@ -37,6 +37,12 @@ namespace FakturniakDataAccess.Data
         public Task<IEnumerable<ModelFaktura>> Get() =>
             _db.LoadData<ModelFaktura, dynamic>("dbo.spFaktury_GetAll", new { });
 
+        public async Task<string> GetNumerFaktury(int? _numer, int _id_typu_faktury)
+        {
+            var result = await _db.LoadData<string, dynamic>("dbo.spGetNumerFaktury", new { numer = _numer, id_typu_faktury = _id_typu_faktury });
+            return result.FirstOrDefault();
+        }
+
         public async Task<ModelFaktura?> Load(string _numer_faktury)
         {
             var results = await _db.LoadData<ModelFaktura, dynamic>("dbo.spFaktury_GetByNumer", new { numer_faktury = _numer_faktury });
@@ -46,7 +52,7 @@ namespace FakturniakDataAccess.Data
         public Task Insert(ModelFaktura f) =>
             _db.SaveData(
                 "dbo.spFaktury_Add",
-                new { f.numer_faktury, f.data_wystawienia, f.data_sprzedazy, f.miejsce_wystawienia, f.id_sprzedawca, f.id_nabywca, f.id_sposob_platnosci, f.termin_platnosci, f.id_typu_faktury });
+                new { f.data_wystawienia, f.data_sprzedazy, f.miejsce_wystawienia, f.id_sprzedawca, f.id_nabywca, f.id_sposob_platnosci, f.termin_platnosci, f.id_typu_faktury, f.uwagi, f.uwagi_wewnetrzne });
         public Task Delete(string _numer_faktury) =>
             _db.SaveData("dbo.spFaktury_Delete", new { numer_faktury = _numer_faktury });
     }

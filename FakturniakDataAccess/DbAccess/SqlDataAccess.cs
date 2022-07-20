@@ -30,8 +30,10 @@ namespace FakturniakDataAccess.DbAccess
         Helper helper = new Helper();
         private string cnnStr;
 
-        public SqlDataAccess()
+        public SqlDataAccess(string username, string pass)
         {
+            helper.setConnectionString("FakturniakDB", $@"Server=localhost\FAKTURNIAKDB;Database=FakturniakDB;User Id={username};Password={pass};");
+
             cnnStr = helper.getConnectionString("FakturniakDB");
         }
 

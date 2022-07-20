@@ -138,9 +138,9 @@ namespace FakturniakUI
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(409, 9);
+            this.textBox3.Location = new System.Drawing.Point(388, 9);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 23);
+            this.textBox3.Size = new System.Drawing.Size(121, 23);
             this.textBox3.TabIndex = 7;
             // 
             // label5
@@ -172,9 +172,9 @@ namespace FakturniakUI
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(409, 41);
+            this.textBox5.Location = new System.Drawing.Point(388, 41);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 23);
+            this.textBox5.Size = new System.Drawing.Size(121, 23);
             this.textBox5.TabIndex = 11;
             // 
             // label7
@@ -189,9 +189,9 @@ namespace FakturniakUI
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(409, 77);
+            this.textBox6.Location = new System.Drawing.Point(388, 77);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 23);
+            this.textBox6.Size = new System.Drawing.Size(121, 23);
             this.textBox6.TabIndex = 13;
             // 
             // label8
@@ -206,9 +206,9 @@ namespace FakturniakUI
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(409, 110);
+            this.textBox7.Location = new System.Drawing.Point(388, 110);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 23);
+            this.textBox7.Size = new System.Drawing.Size(121, 23);
             this.textBox7.TabIndex = 15;
             // 
             // label9
@@ -223,16 +223,16 @@ namespace FakturniakUI
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(409, 145);
+            this.textBox8.Location = new System.Drawing.Point(388, 145);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 23);
+            this.textBox8.Size = new System.Drawing.Size(121, 23);
             this.textBox8.TabIndex = 16;
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(409, 180);
+            this.textBox9.Location = new System.Drawing.Point(388, 180);
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 23);
+            this.textBox9.Size = new System.Drawing.Size(121, 23);
             this.textBox9.TabIndex = 17;
             // 
             // label10
@@ -267,9 +267,9 @@ namespace FakturniakUI
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(409, 215);
+            this.textBox10.Location = new System.Drawing.Point(388, 215);
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 23);
+            this.textBox10.Size = new System.Drawing.Size(121, 23);
             this.textBox10.TabIndex = 21;
             // 
             // label13
@@ -353,7 +353,7 @@ namespace FakturniakUI
             this.panel2.Controls.Add(this.label16);
             this.panel2.Controls.Add(this.maskedTextBox1);
             this.panel2.Controls.Add(this.label15);
-            this.panel2.Location = new System.Drawing.Point(157, 73);
+            this.panel2.Location = new System.Drawing.Point(182, 73);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(244, 149);
             this.panel2.TabIndex = 26;
@@ -422,7 +422,7 @@ namespace FakturniakUI
             this.panel3.Controls.Add(this.button4);
             this.panel3.Controls.Add(this.label17);
             this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(12, 73);
+            this.panel3.Location = new System.Drawing.Point(12, 69);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(556, 254);
             this.panel3.TabIndex = 30;
@@ -517,6 +517,7 @@ namespace FakturniakUI
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormRejestracja";
             this.Text = "Rejestracja";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormRejestracja_FormClosed);

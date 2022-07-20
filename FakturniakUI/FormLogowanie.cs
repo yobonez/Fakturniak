@@ -37,14 +37,17 @@ namespace FakturniakUI
 
         private void FormLogowanie_Load(object sender, EventArgs e)
         {
-            FakturniakConfigModel modelCfg = new FakturniakConfigModel();
-            FakturniakConfig config = new FakturniakConfig();
+            //FakturniakConfigModel modelCfg = new FakturniakConfigModel();
+            //FakturniakConfig config = new FakturniakConfig // 19.07
 
-            modelCfg = config.Load("FakturniakConfig.xml");
-            if (modelCfg.logo_path == "")
+            this.CenterToScreen();
+            // 20.07
+            FakturniakConfig.Load("FakturniakConfig.xml");
+
+            if (FakturniakConfig.xmlFakturniakConfig.logo_path == "")
                 pictureBox1.Image = Resources.braklogo;
             else
-                pictureBox1.ImageLocation = modelCfg.logo_path;
+                pictureBox1.ImageLocation = FakturniakConfig.xmlFakturniakConfig.logo_path;
 
         }
 
@@ -72,18 +75,24 @@ namespace FakturniakUI
                     success = false;
                 }
             }
+
             if (!success)
                 this.Focus();
             else
             {
-                FakturniakConfig config = new FakturniakConfig();
+                //FakturniakConfig config = new FakturniakConfig();
+                //FakturniakConfigModel cfgModel = config.Load("FakturniakConfig.xml"); // 19.07
 
-                FakturniakConfigModel cfgModel = config.Load("ConfigFakturniak.xml");
-                cfgModel.ostatni_zalogowany_uzytkownik = username;
-                config.Write("ConfigFakturniak.xml", cfgModel);
+                FakturniakConfig.xmlFakturniakConfig.ostatni_zalogowany_uzytkownik = username;
+                FakturniakConfig.Write("FakturniakConfig.xml", FakturniakConfig.xmlFakturniakConfig);
 
-                Helper helper = new Helper();
-                helper.setConnectionString("FakturniakDB", cnnstr);
+                // 20.07
+                FakturniakConfig.username = username;
+                FakturniakConfig.pass = pass;
+
+                // 19.07
+                //Helper helper = new Helper();
+                //helper.setConnectionString("FakturniakDB", cnnstr);
 
                 this.Close();
             }

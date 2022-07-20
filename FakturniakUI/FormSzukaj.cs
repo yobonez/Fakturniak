@@ -25,6 +25,7 @@ using System.Linq;
 using FakturniakDataAccess.Data;
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using FakturniakUI.Config;
 
 namespace FakturniakUI
 {
@@ -34,7 +35,7 @@ namespace FakturniakUI
 
         private string tabela;
 
-        readonly ISqlDataAccess dataAccess = new SqlDataAccess();
+        readonly ISqlDataAccess dataAccess = new SqlDataAccess(FakturniakConfig.username, FakturniakConfig.pass);
 
         IEnumerable<ModelKontrahent> kontrahenci_enumerable;
         List<ModelKontrahent> kontrahenci;

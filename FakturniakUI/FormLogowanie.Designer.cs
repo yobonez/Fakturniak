@@ -100,6 +100,7 @@ namespace FakturniakUI
             this.Controls.Add(this.labelLogin);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormLogowanie";
             this.Text = "FormLogowanie";

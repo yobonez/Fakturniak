@@ -22,16 +22,19 @@ using System.Xml.Serialization;
 
 namespace FakturniakUI.Config
 {
-    public class FakturniakConfig
+    public static class FakturniakConfig
     {
-        FakturniakConfigModel xmlFakturniakConfig = new FakturniakConfigModel()
+        public static string username;
+        public static string pass;
+
+        public static FakturniakConfigModel xmlFakturniakConfig = new FakturniakConfigModel()
         {
             id_zarejestrowany = -1,
             ostatni_zalogowany_uzytkownik = "Administrator",
             logo_path = ""
         };
 
-        public FakturniakConfigModel Load(string filename)
+        public static void Load(string filename)
         {
             var xmlSerializer = new XmlSerializer(typeof(FakturniakConfigModel));
             if (File.Exists(filename))
@@ -48,10 +51,10 @@ namespace FakturniakUI.Config
                 Write(filename, xmlFakturniakConfig);
             }
 
-            return xmlFakturniakConfig;
+            //return xmlFakturniakConfig;
         }
 
-        public void Write(string filename, FakturniakConfigModel confModel)
+        public static void Write(string filename, FakturniakConfigModel confModel)
         {
             if (!File.Exists(filename))
             {
@@ -64,8 +67,6 @@ namespace FakturniakUI.Config
             {
                 xmlSerializer.Serialize(writer, confModel);
             }
-
         }
     }
-
 }

@@ -24,28 +24,32 @@ using System.Windows.Forms;
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
 using FakturniakDataAccess.Data;
+using FakturniakUI.Config;
 
 
 namespace FakturniakUI
 {
     public partial class FormFaktura : Form
     {
-        readonly ISqlDataAccess dataAccess = new SqlDataAccess();
+        readonly ISqlDataAccess dataAccess = new SqlDataAccess(FakturniakConfig.username, FakturniakConfig.pass);
 
         /// <summary>
-        /// Sekcja gotowych danych, które mają być zatwierdzone po kliknięciu "Wystaw"
+        /// Sekcja gotowych danych, które mają być zatwierdzone po kliknięciu "Wystaw" (niektóre będą gotowe dopiero po kliknięciu)
         /// </summary>
+        
+        string __numer_faktury = "";
 
-        DateTime data_wystawienia = new DateTime();
-        DateTime data_wykonania = new DateTime();
-        DateTime termin_platnosci = new DateTime();
+        //DateTime data_wystawienia = new DateTime();
+        //DateTime data_wykonania = new DateTime();
+        //DateTime termin_platnosci = new DateTime();
 
+        ModelKontrahent sprzedawca = new ModelKontrahent();
         ModelKontrahent nabywca = new ModelKontrahent();
 
         ModelSposobPlatnosci sposob_platnosci = new ModelSposobPlatnosci();
-        List<ModelMTMFakturaProdukt> produktyFaktura = new List<ModelMTMFakturaProdukt>();
 
         Decimal do_zaplaty = 0.00M;
+
         /// <summary>
         /// Koniec sekcji danych do zatwierdzenia
         /// </summary>
@@ -60,10 +64,15 @@ namespace FakturniakUI
         }
 
         private async void FormFaktura_Load(object sender, EventArgs e)
-        { 
+        {
+
             this.CenterToParent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.pictureBox1.ImageLocation = FakturniakConfig.xmlFakturniakConfig.logo_path;
+
+            IDataFaktury dataFaktury = new DataFaktury(dataAccess);
+            await Task.Run(() => __numer_faktury = dataFaktury.GetNumerFaktury(null, 0).Result);
 
             IDataProdukty dataProdukty = new DataProdukty(dataAccess);
             await Task.Run(() => produkty = dataProdukty.Get().Result.ToList());
@@ -76,7 +85,40 @@ namespace FakturniakUI
                 comboBoxMetodyPlatnosci.Items.Add(spPlatnosci.nazwa);
             }
 
+            loadSprzedawca();
             populateProdukty();
+
+            textBox1.Text = __numer_faktury.Substring(3, 3);
+            string toDateTime = __numer_faktury.Substring(7, 7);
+            dateTimePicker1.Value = DateTime.Parse(toDateTime);
+        }
+
+
+        private async void loadSprzedawca()
+        {
+            int id_sprzedawcy_do_zaladowania = FakturniakConfig.xmlFakturniakConfig.id_zarejestrowany;
+
+            IDataKontrahenci kontrahenci = new DataKontrahenci(dataAccess);
+            ModelKontrahent _sprzedawca = new ModelKontrahent();
+
+            await Task.Run(() => _sprzedawca = kontrahenci.Load(id_sprzedawcy_do_zaladowania).Result);
+
+            textBoxSIMIE.Text = _sprzedawca.imie;
+            textBoxSNAZWISKO.Text = _sprzedawca.nazwisko;
+            textBoxSNAZWA.Text = _sprzedawca.nazwa;
+
+            textBoxSNumery1.Text = _sprzedawca.pesel;
+            textBoxSNumery2.Text = _sprzedawca.nip;
+            textBoxSNumery3.Text = _sprzedawca.krs;
+            textBoxSNumery4.Text = _sprzedawca.regon;
+
+            textBoxSAdres.Text = _sprzedawca.adres;
+            textBoxSMiasto.Text = _sprzedawca.miasto;
+            maskedTextBoxSKodPocztowy.Text = _sprzedawca.kod_pocztowy;
+
+            maskedTextBox3.Text = _sprzedawca.numer_konta;
+
+            sprzedawca = _sprzedawca;
         }
 
         private void populateProdukty()
@@ -181,7 +223,7 @@ namespace FakturniakUI
                         Decimal wartosc_vat = 0.00M;
                         wartosc_vat = wartosc_brutto - child_control.cena_netto;
 
-                        object[] rowArrToAdd = {child_control.id_produktu,
+                        object[] rowArrToAdd = {0,
                                                 child_control.nazwa,
                                                 tempJednostkaMiary.nazwa,
                                                 _ilosc,
@@ -189,7 +231,8 @@ namespace FakturniakUI
                                                 child_control.cena_brutto,
                                                 tempStawkaVAT.wartosc,
                                                 wartosc_vat,
-                                                wartosc_brutto};
+                                                wartosc_brutto,
+                                                child_control.id_produktu};
 
                         this.dataGridViewMTMProdukty.Rows.Add(rowArrToAdd);
                     }
@@ -209,6 +252,7 @@ namespace FakturniakUI
                 dataGridViewMTMProdukty.Rows.Remove(Row);
             }
 
+
             if(!anySelected)
             {
                 MessageBox.Show(this, "Najpierw wybierz produkty zaznaczając je poprzez kliknięcie w puste pole bez kolumny po lewej stronie.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -217,10 +261,14 @@ namespace FakturniakUI
 
         void UpdateProdukty()
         {
+            int lp_produkt = 0;
+
             foreach (DataGridViewRow Row in dataGridViewMTMProdukty.Rows)
             {
                 if (Row.Cells[0].Value == null)
                     continue;
+
+                Row.Cells["lp"].Value = ++lp_produkt;
 
                 int ilosc = Int32.Parse(Row.Cells["Ilosc"].Value.ToString());
                 Decimal kwota_jeden_brutto = Decimal.Parse(Row.Cells["Brutto"].Value.ToString());
@@ -247,10 +295,6 @@ namespace FakturniakUI
         }
 
 
-        private void Wystaw_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void textBoxSzukaj_MouseClick(object sender, MouseEventArgs e)
         {
@@ -291,7 +335,7 @@ namespace FakturniakUI
             textBoxNNumery4.Text = nabywca.regon;
             textBoxNAdres.Text = nabywca.adres;
             textBoxNMiasto.Text = nabywca.miasto;
-            maskedTextBoxKodPocztowy.Text = nabywca.kod_pocztowy;
+            maskedTextBoxNKodPocztowy.Text = nabywca.kod_pocztowy;
 
             panelNabywca1.Enabled = false;
             panelNabywca2.Enabled = false;
@@ -303,14 +347,11 @@ namespace FakturniakUI
             labelPLN.Left = labelKwota.Right + 1;
         }
 
-        //private void dataGridViewMTMProdukty_CellEndEdit(object sender, DataGridViewCellEventArgs e) => UpdateProdukty();
-
         private void dataGridViewMTMProdukty_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) => UpdateProdukty();
 
         private void dataGridViewMTMProdukty_CellValueChanged(object sender, DataGridViewCellEventArgs e) => UpdateProdukty();
 
         private void dataGridViewMTMProdukty_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) => UpdateProdukty();
-
         private void comboBoxMetodyPlatnosci_SelectedIndexChanged(object sender, EventArgs e)
         {
             foreach (ModelSposobPlatnosci spPlatnosci in sposoby_platnosci)
@@ -324,6 +365,76 @@ namespace FakturniakUI
                     };
                 }
             }
+        }
+        private void Wystaw_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show(this, "Jesteś pewien, że chcesz wystawić tą fakturę? \nPrzed wystawieniem upewnij się, czy wszystkie wpisane dane są poprawne.", "Ostrzeżenie", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (!(dialogResult == DialogResult.OK))
+                this.Focus();
+
+            IDataFaktury dataFaktury = new DataFaktury(dataAccess);
+            IDataMTMFakturaProdukt dataMTMFakturaProdukt = new DataMTMFakturaProdukt(dataAccess);
+
+
+            // TODO: SPRAWDŹ JESZCZE SPOWROTEM DATETIME, MOŻE BŁĄD BYŁ
+            // SPOWODOWANY CZYMŚ INNYM
+            // we to daj do jakiejs funkcji kiedy
+            string _data_wystawienia = dateTimePickerWystawienie.Value.Month + "." +
+                                       dateTimePickerWystawienie.Value.Day   + "." +
+                                       dateTimePickerWystawienie.Value.Year;
+
+            string _data_sprzedazy =   dateTimePickerSprzedaz.Value.Month    + "." +
+                                       dateTimePickerSprzedaz.Value.Day      + "." +
+                                       dateTimePickerSprzedaz.Value.Year;
+
+            string _termin_platnosci = dateTimePickerTermin.Value.Month      + "." +
+                                       dateTimePickerTermin.Value.Day        + "." +
+                                       dateTimePickerTermin.Value.Year;
+
+            // do inserta do tabeli FAKTUR
+            ModelFaktura faktura = new ModelFaktura();
+            faktura.id_sprzedawca = FakturniakConfig.xmlFakturniakConfig.id_zarejestrowany;
+            faktura.id_nabywca = nabywca.id_kontrahenta;
+
+            faktura.numer_faktury = __numer_faktury;
+            faktura.data_wystawienia = _data_wystawienia;
+            faktura.data_sprzedazy = _data_sprzedazy;
+            faktura.miejsce_wystawienia = textBoxWystawienie.Text;
+            faktura.id_sposob_platnosci = sposob_platnosci.id_sposob_platnosci;
+            faktura.termin_platnosci = _termin_platnosci;
+            // dodawaj również numer konta kiedyś do faktury, żeby na podglądzie
+            // był ten sam
+
+            faktura.uwagi = richTextBoxUwagi.Text;
+            faktura.uwagi_wewnetrzne = richTextBoxUwagiWewnetrzne.Text;
+
+            // do inserta do tabeli PRODUKTÓW FAKURY
+            List<ModelMTMFakturaProdukt> produktyFaktury = new List<ModelMTMFakturaProdukt>();
+
+            foreach (DataGridViewRow Row in this.dataGridViewMTMProdukty.Rows)
+            {
+                if (Row.Cells[0].Value == null)
+                    continue;
+
+                ModelMTMFakturaProdukt temp_produkt = new ModelMTMFakturaProdukt
+                {
+                    numer_faktury = __numer_faktury,
+                    id_produktu = Int32.Parse(Row.Cells["ID"].Value.ToString()),
+                    ilosc = Int32.Parse(Row.Cells["Ilosc"].Value.ToString())
+                };
+
+                produktyFaktury.Add(temp_produkt);
+            }
+
+            // INSERT
+            dataFaktury.Insert(faktura);
+            foreach(ModelMTMFakturaProdukt faktura_produkt in produktyFaktury)
+            {
+                dataMTMFakturaProdukt.Insert(faktura_produkt);
+            }
+            // KONIEC INSERTA
+
+            MessageBox.Show(this, "Pomyślnie wystawiono fakturę.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

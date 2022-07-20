@@ -30,11 +30,13 @@ namespace FakturniakUI
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            FakturniakConfig cfg = new FakturniakConfig();
-            FakturniakConfigModel cfgModel = new FakturniakConfigModel();
-            cfgModel = cfg.Load("FakturniakConfig.xml");
+            //FakturniakConfig cfg = new FakturniakConfig();
+            //FakturniakConfigModel cfgModel = new FakturniakConfigModel(); // 19.07
 
-            if (cfgModel.id_zarejestrowany > 0)
+            // 20.07 config jako klasa statyczna
+            FakturniakConfig.Load("FakturniakConfig.xml");
+
+            if (FakturniakConfig.xmlFakturniakConfig.id_zarejestrowany > 0)
             {
                 using (FormLogowanie flogowanie = new FormLogowanie())
                 {
@@ -55,6 +57,7 @@ namespace FakturniakUI
 
         private void NowaFaktura_Click(object sender, EventArgs e)
         {
+            // TODO: focus na Form1, jak zamkniesz okno faktur
             FormFaktura formFaktura = new FormFaktura();
             formFaktura.Show();
         }

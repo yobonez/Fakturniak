@@ -26,6 +26,7 @@ namespace FakturniakDataAccess.Data
     {
         Task Delete(string _numer_faktury);
         Task<IEnumerable<ModelFaktura>> Get();
+        Task<string> GetNumerFaktury(int? _numer, int _id_typu_faktury);
         Task Insert(ModelFaktura f);
         Task<ModelFaktura> Load(string _numer_faktury);
     }

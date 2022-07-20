@@ -35,7 +35,7 @@ namespace FakturniakUI
         private bool pomyslna_rejestracja = false;
 
         int obecny_krok = 0;
-        readonly ISqlDataAccess dataAccess = new SqlDataAccess();
+        readonly ISqlDataAccess dataAccess = new SqlDataAccess("Administrator", "$administrator$");
 
         ModelKontrahent dane;
         public FormRejestracja()
@@ -237,19 +237,32 @@ namespace FakturniakUI
                 List<ModelKontrahent> lista_kontrahenci = kontrahenci.ToList();
                 ModelKontrahent last_kontrahent = lista_kontrahenci.Last();
 
-                FakturniakConfig config = new FakturniakConfig();
+                //FakturniakConfig config = new FakturniakConfig();
 
-                FakturniakConfigModel cfg = new FakturniakConfigModel()
+                /*FakturniakConfigModel cfg = new FakturniakConfigModel()
+                {
+                    id_zarejestrowany = last_kontrahent.id_kontrahenta,
+                    ostatni_zalogowany_uzytkownik = "Administrator",
+                    logo_path = pictureBox1.ImageLocation
+                };*/ 
+                // 19.07
+
+                // 20.07 config jako klasa statyczna
+                FakturniakConfig.xmlFakturniakConfig = new FakturniakConfigModel
                 {
                     id_zarejestrowany = last_kontrahent.id_kontrahenta,
                     ostatni_zalogowany_uzytkownik = "Administrator",
                     logo_path = pictureBox1.ImageLocation
                 };
 
-                config.Write("FakturniakConfig.xml", cfg);
+                FakturniakConfig.Write("FakturniakConfig.xml", FakturniakConfig.xmlFakturniakConfig);
+
+                FakturniakConfig.username = "Administrator";
+                FakturniakConfig.pass = "$administrator$";
 
                 this.Close();
             }
+
             this.Focus();
         }
 
