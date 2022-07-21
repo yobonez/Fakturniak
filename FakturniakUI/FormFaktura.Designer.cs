@@ -125,6 +125,7 @@ namespace FakturniakUI
             this.LabelTypFaktury = new System.Windows.Forms.Label();
             this.Wystaw = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.Podglad = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -1063,7 +1064,7 @@ namespace FakturniakUI
             // 
             // Wystaw
             // 
-            this.Wystaw.Location = new System.Drawing.Point(504, 865);
+            this.Wystaw.Location = new System.Drawing.Point(558, 865);
             this.Wystaw.Name = "Wystaw";
             this.Wystaw.Size = new System.Drawing.Size(141, 23);
             this.Wystaw.TabIndex = 2;
@@ -1080,11 +1081,22 @@ namespace FakturniakUI
             this.label9.TabIndex = 7;
             this.label9.Text = "label9";
             // 
+            // Podglad
+            // 
+            this.Podglad.Location = new System.Drawing.Point(411, 865);
+            this.Podglad.Name = "Podglad";
+            this.Podglad.Size = new System.Drawing.Size(141, 23);
+            this.Podglad.TabIndex = 8;
+            this.Podglad.Text = "Podgląd";
+            this.Podglad.UseVisualStyleBackColor = true;
+            this.Podglad.Click += new System.EventHandler(this.Podglad_Click);
+            // 
             // FormFaktura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 891);
+            this.Controls.Add(this.Podglad);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.Wystaw);
@@ -1223,5 +1235,6 @@ namespace FakturniakUI
         private System.Windows.Forms.DataGridViewTextBoxColumn KVAT;
         private System.Windows.Forms.DataGridViewTextBoxColumn WBrutto;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.Button Podglad;
     }
 }

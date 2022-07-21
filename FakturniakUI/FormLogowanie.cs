@@ -49,6 +49,7 @@ namespace FakturniakUI
             else
                 pictureBox1.ImageLocation = FakturniakConfig.xmlFakturniakConfig.logo_path;
 
+            textBox1.Text = FakturniakConfig.xmlFakturniakConfig.ostatni_zalogowany_uzytkownik;
         }
 
         private void button1_Click(object sender, EventArgs e)

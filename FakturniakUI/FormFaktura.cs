@@ -43,6 +43,9 @@ namespace FakturniakUI
         //DateTime data_wykonania = new DateTime();
         //DateTime termin_platnosci = new DateTime();
 
+        ModelFaktura faktura = new ModelFaktura();
+        List<ModelMTMFakturaProdukt> produktyFaktury = new List<ModelMTMFakturaProdukt>();
+
         ModelKontrahent sprzedawca = new ModelKontrahent();
         ModelKontrahent nabywca = new ModelKontrahent();
 
@@ -294,7 +297,57 @@ namespace FakturniakUI
             labelKwota.Text = kwota_do_zaplaty.ToString();
         }
 
+        void ZaladujDaneZFaktury()
+        {
 
+            // TODO: SPRAWDŹ JESZCZE SPOWROTEM DATETIME, MOŻE BŁĄD BYŁ
+            // SPOWODOWANY CZYMŚ INNYM
+            // we to daj do jakiejs funkcji kiedy
+            string _data_wystawienia = dateTimePickerWystawienie.Value.Month + "." +
+                           dateTimePickerWystawienie.Value.Day + "." +
+                           dateTimePickerWystawienie.Value.Year;
+
+            string _data_sprzedazy = dateTimePickerSprzedaz.Value.Month + "." +
+                                       dateTimePickerSprzedaz.Value.Day + "." +
+                                       dateTimePickerSprzedaz.Value.Year;
+
+            string _termin_platnosci = dateTimePickerTermin.Value.Month + "." +
+                                       dateTimePickerTermin.Value.Day + "." +
+                                       dateTimePickerTermin.Value.Year;
+
+            // do inserta do tabeli FAKTUR
+            
+            faktura.id_sprzedawca = FakturniakConfig.xmlFakturniakConfig.id_zarejestrowany;
+            faktura.id_nabywca = nabywca.id_kontrahenta;
+
+            faktura.numer_faktury = __numer_faktury;
+            faktura.data_wystawienia = _data_wystawienia;
+            faktura.data_sprzedazy = _data_sprzedazy;
+            faktura.miejsce_wystawienia = textBoxWystawienie.Text;
+            faktura.id_sposob_platnosci = sposob_platnosci.id_sposob_platnosci;
+            faktura.termin_platnosci = _termin_platnosci;
+            // dodawaj również numer konta kiedyś do faktury, żeby na podglądzie
+            // był ten sam
+
+            faktura.uwagi = richTextBoxUwagi.Text;
+            faktura.uwagi_wewnetrzne = richTextBoxUwagiWewnetrzne.Text;
+
+            // do inserta do tabeli PRODUKTÓW FAKURY
+            foreach (DataGridViewRow Row in this.dataGridViewMTMProdukty.Rows)
+            {
+                if (Row.Cells[0].Value == null)
+                    continue;
+
+                ModelMTMFakturaProdukt temp_produkt = new ModelMTMFakturaProdukt
+                {
+                    numer_faktury = __numer_faktury,
+                    id_produktu = Int32.Parse(Row.Cells["ID"].Value.ToString()),
+                    ilosc = Int32.Parse(Row.Cells["Ilosc"].Value.ToString())
+                };
+
+                produktyFaktury.Add(temp_produkt);
+            }
+        }
 
         private void textBoxSzukaj_MouseClick(object sender, MouseEventArgs e)
         {
@@ -375,56 +428,7 @@ namespace FakturniakUI
             IDataFaktury dataFaktury = new DataFaktury(dataAccess);
             IDataMTMFakturaProdukt dataMTMFakturaProdukt = new DataMTMFakturaProdukt(dataAccess);
 
-
-            // TODO: SPRAWDŹ JESZCZE SPOWROTEM DATETIME, MOŻE BŁĄD BYŁ
-            // SPOWODOWANY CZYMŚ INNYM
-            // we to daj do jakiejs funkcji kiedy
-            string _data_wystawienia = dateTimePickerWystawienie.Value.Month + "." +
-                                       dateTimePickerWystawienie.Value.Day   + "." +
-                                       dateTimePickerWystawienie.Value.Year;
-
-            string _data_sprzedazy =   dateTimePickerSprzedaz.Value.Month    + "." +
-                                       dateTimePickerSprzedaz.Value.Day      + "." +
-                                       dateTimePickerSprzedaz.Value.Year;
-
-            string _termin_platnosci = dateTimePickerTermin.Value.Month      + "." +
-                                       dateTimePickerTermin.Value.Day        + "." +
-                                       dateTimePickerTermin.Value.Year;
-
-            // do inserta do tabeli FAKTUR
-            ModelFaktura faktura = new ModelFaktura();
-            faktura.id_sprzedawca = FakturniakConfig.xmlFakturniakConfig.id_zarejestrowany;
-            faktura.id_nabywca = nabywca.id_kontrahenta;
-
-            faktura.numer_faktury = __numer_faktury;
-            faktura.data_wystawienia = _data_wystawienia;
-            faktura.data_sprzedazy = _data_sprzedazy;
-            faktura.miejsce_wystawienia = textBoxWystawienie.Text;
-            faktura.id_sposob_platnosci = sposob_platnosci.id_sposob_platnosci;
-            faktura.termin_platnosci = _termin_platnosci;
-            // dodawaj również numer konta kiedyś do faktury, żeby na podglądzie
-            // był ten sam
-
-            faktura.uwagi = richTextBoxUwagi.Text;
-            faktura.uwagi_wewnetrzne = richTextBoxUwagiWewnetrzne.Text;
-
-            // do inserta do tabeli PRODUKTÓW FAKURY
-            List<ModelMTMFakturaProdukt> produktyFaktury = new List<ModelMTMFakturaProdukt>();
-
-            foreach (DataGridViewRow Row in this.dataGridViewMTMProdukty.Rows)
-            {
-                if (Row.Cells[0].Value == null)
-                    continue;
-
-                ModelMTMFakturaProdukt temp_produkt = new ModelMTMFakturaProdukt
-                {
-                    numer_faktury = __numer_faktury,
-                    id_produktu = Int32.Parse(Row.Cells["ID"].Value.ToString()),
-                    ilosc = Int32.Parse(Row.Cells["Ilosc"].Value.ToString())
-                };
-
-                produktyFaktury.Add(temp_produkt);
-            }
+            ZaladujDaneZFaktury();
 
             // INSERT
             dataFaktury.Insert(faktura);
@@ -435,6 +439,14 @@ namespace FakturniakUI
             // KONIEC INSERTA
 
             MessageBox.Show(this, "Pomyślnie wystawiono fakturę.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Podglad_Click(object sender, EventArgs e)
+        {
+            ZaladujDaneZFaktury();
+
+            FakturaViewer viewer = new FakturaViewer(faktura, produktyFaktury);
+            viewer.Show();
         }
     }
 }
