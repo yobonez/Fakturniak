@@ -27,6 +27,7 @@ using FakturniakDataAccess.Data;
 using FakturniakUI.Config;
 
 
+
 namespace FakturniakUI
 {
     public partial class FormFaktura : Form
@@ -349,6 +350,12 @@ namespace FakturniakUI
             }
         }
 
+        void PodgladDruk()
+        {
+            FakturaViewer fakturaViewer = new FakturaViewer(faktura, produktyFaktury, sprzedawca, nabywca);
+            fakturaViewer.ShowDialog();
+        }
+
         private void textBoxSzukaj_MouseClick(object sender, MouseEventArgs e)
         {
             if (this.textBoxSzukaj.Text == "Szukaj...")
@@ -409,7 +416,7 @@ namespace FakturniakUI
         {
             foreach (ModelSposobPlatnosci spPlatnosci in sposoby_platnosci)
             {
-                if (comboBoxMetodyPlatnosci.SelectedItem == spPlatnosci.nazwa)
+                if (comboBoxMetodyPlatnosci.SelectedItem.ToString()/*CS0252*/ == spPlatnosci.nazwa)
                 {
                     sposob_platnosci = new ModelSposobPlatnosci
                     {
@@ -422,31 +429,38 @@ namespace FakturniakUI
         private void Wystaw_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show(this, "Jesteś pewien, że chcesz wystawić tą fakturę? \nPrzed wystawieniem upewnij się, czy wszystkie wpisane dane są poprawne.", "Ostrzeżenie", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            if (!(dialogResult == DialogResult.OK))
+            if (dialogResult != DialogResult.OK)
                 this.Focus();
-
-            IDataFaktury dataFaktury = new DataFaktury(dataAccess);
-            IDataMTMFakturaProdukt dataMTMFakturaProdukt = new DataMTMFakturaProdukt(dataAccess);
-
-            ZaladujDaneZFaktury();
-
-            // INSERT
-            dataFaktury.Insert(faktura);
-            foreach(ModelMTMFakturaProdukt faktura_produkt in produktyFaktury)
+            else
             {
-                dataMTMFakturaProdukt.Insert(faktura_produkt);
+                IDataFaktury dataFaktury = new DataFaktury(dataAccess);
+                IDataMTMFakturaProdukt dataMTMFakturaProdukt = new DataMTMFakturaProdukt(dataAccess);
+
+                ZaladujDaneZFaktury();
+
+                // INSERT
+                dataFaktury.Insert(faktura);
+                foreach (ModelMTMFakturaProdukt faktura_produkt in produktyFaktury)
+                {
+                    dataMTMFakturaProdukt.Insert(faktura_produkt);
+                }
+                // KONIEC INSERTA
             }
-            // KONIEC INSERTA
 
             MessageBox.Show(this, "Pomyślnie wystawiono fakturę.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult drukResult = MessageBox.Show(this, "Czy chcesz zobaczyć podgląd/wydrukować tę fakturę?", "Opcja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (drukResult != DialogResult.Yes)
+                this.Focus();
+            else
+                PodgladDruk();
         }
 
         private void Podglad_Click(object sender, EventArgs e)
         {
+            // narazie ogarne sobie podgląd i wydruk PO wystawieniu, bo wtedy mam dostęp do danych w bazie
+            // a tu potem pokombinuję jak zrobić tymczasowe rekordy, które bym mógł wypełnić
             ZaladujDaneZFaktury();
-
-            FakturaViewer viewer = new FakturaViewer(faktura, produktyFaktury);
-            viewer.Show();
+            PodgladDruk();
         }
     }
 }
