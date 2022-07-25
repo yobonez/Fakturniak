@@ -30,16 +30,32 @@ namespace FakturniakUI
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.NowaFaktura = new System.Windows.Forms.Button();
+            this.utwórzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kontrahentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.produktToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sposóbPłatnościToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stawkęVATToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.typFakturyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.utwórzToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
             // 
             // NowaFaktura
             // 
@@ -50,6 +66,49 @@ namespace FakturniakUI
             this.NowaFaktura.Text = "Nowa faktura";
             this.NowaFaktura.UseVisualStyleBackColor = true;
             this.NowaFaktura.Click += new System.EventHandler(this.NowaFaktura_Click);
+            // 
+            // utwórzToolStripMenuItem
+            // 
+            this.utwórzToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kontrahentaToolStripMenuItem,
+            this.produktToolStripMenuItem,
+            this.sposóbPłatnościToolStripMenuItem,
+            this.stawkęVATToolStripMenuItem,
+            this.typFakturyToolStripMenuItem});
+            this.utwórzToolStripMenuItem.Name = "utwórzToolStripMenuItem";
+            this.utwórzToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.utwórzToolStripMenuItem.Text = "Utwórz";
+            // 
+            // kontrahentaToolStripMenuItem
+            // 
+            this.kontrahentaToolStripMenuItem.Name = "kontrahentaToolStripMenuItem";
+            this.kontrahentaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.kontrahentaToolStripMenuItem.Text = "Kontrahenta";
+            // 
+            // produktToolStripMenuItem
+            // 
+            this.produktToolStripMenuItem.Name = "produktToolStripMenuItem";
+            this.produktToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.produktToolStripMenuItem.Text = "Produkt";
+            this.produktToolStripMenuItem.Click += new System.EventHandler(this.produktToolStripMenuItem_Click);
+            // 
+            // sposóbPłatnościToolStripMenuItem
+            // 
+            this.sposóbPłatnościToolStripMenuItem.Name = "sposóbPłatnościToolStripMenuItem";
+            this.sposóbPłatnościToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sposóbPłatnościToolStripMenuItem.Text = "Sposób płatności";
+            // 
+            // stawkęVATToolStripMenuItem
+            // 
+            this.stawkęVATToolStripMenuItem.Name = "stawkęVATToolStripMenuItem";
+            this.stawkęVATToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stawkęVATToolStripMenuItem.Text = "Stawkę VAT";
+            // 
+            // typFakturyToolStripMenuItem
+            // 
+            this.typFakturyToolStripMenuItem.Name = "typFakturyToolStripMenuItem";
+            this.typFakturyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.typFakturyToolStripMenuItem.Text = "Typ faktury";
             // 
             // Form1
             // 
@@ -62,6 +121,8 @@ namespace FakturniakUI
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -71,6 +132,13 @@ namespace FakturniakUI
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Button NowaFaktura;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem utwórzToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kontrahentaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem produktToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sposóbPłatnościToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stawkęVATToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem typFakturyToolStripMenuItem;
     }
 }
 

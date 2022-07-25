@@ -62,6 +62,8 @@ namespace FakturniakUI
         List<ModelProdukt> produkty;
         List<ModelSposobPlatnosci> sposoby_platnosci = new List<ModelSposobPlatnosci>();
 
+        List<object[]> kompletne_obiekty_produkty = new List<object[]>();
+
         public FormFaktura()
         {
             InitializeComponent();
@@ -238,6 +240,7 @@ namespace FakturniakUI
                                                 wartosc_brutto,
                                                 child_control.id_produktu};
 
+                        kompletne_obiekty_produkty.Add(rowArrToAdd);
                         this.dataGridViewMTMProdukty.Rows.Add(rowArrToAdd);
                     }
                 }
@@ -252,8 +255,15 @@ namespace FakturniakUI
                 if (Row.Cells[0].Value == null)
                     continue;
 
+                int rowLP = Int32.Parse(Row.Cells[0].Value.ToString());
                 anySelected = true;
+
                 dataGridViewMTMProdukty.Rows.Remove(Row);
+
+                if (kompletne_obiekty_produkty[rowLP - 1][9] == Row.Cells[9].Value)
+                {
+                    kompletne_obiekty_produkty.Remove(kompletne_obiekty_produkty[rowLP - 1]);
+                }
             }
 
 
@@ -284,8 +294,11 @@ namespace FakturniakUI
 
                 Row.Cells["KVAT"].Value = kwota_xilosc_brutto - kwota_xilosc_netto;
                 Row.Cells["WBrutto"].Value = kwota_xilosc_brutto;
-            }
 
+                kompletne_obiekty_produkty[lp_produkt - 1][3] = ilosc.ToString(); // NIECZYTELNOŚĆ 100
+                kompletne_obiekty_produkty[lp_produkt - 1][7] = (kwota_xilosc_brutto - kwota_xilosc_netto).ToString();
+                kompletne_obiekty_produkty[lp_produkt - 1][8] = kwota_xilosc_brutto.ToString();
+            }
             Decimal kwota_do_zaplaty = 0.00M;
             foreach (DataGridViewRow Row in dataGridViewMTMProdukty.Rows)
             {
@@ -296,37 +309,26 @@ namespace FakturniakUI
                 kwota_do_zaplaty += temp_jeden_wbrutto;
             }
             labelKwota.Text = kwota_do_zaplaty.ToString();
+            do_zaplaty = kwota_do_zaplaty;
         }
 
         void ZaladujDaneZFaktury()
         {
-
-            // TODO: SPRAWDŹ JESZCZE SPOWROTEM DATETIME, MOŻE BŁĄD BYŁ
-            // SPOWODOWANY CZYMŚ INNYM
-            // we to daj do jakiejs funkcji kiedy
-            string _data_wystawienia = dateTimePickerWystawienie.Value.Month + "." +
-                           dateTimePickerWystawienie.Value.Day + "." +
-                           dateTimePickerWystawienie.Value.Year;
-
-            string _data_sprzedazy = dateTimePickerSprzedaz.Value.Month + "." +
-                                       dateTimePickerSprzedaz.Value.Day + "." +
-                                       dateTimePickerSprzedaz.Value.Year;
-
-            string _termin_platnosci = dateTimePickerTermin.Value.Month + "." +
-                                       dateTimePickerTermin.Value.Day + "." +
-                                       dateTimePickerTermin.Value.Year;
+            DateTime _data_wystawienia = dateTimePickerWystawienie.Value;
+            DateTime _data_sprzedazy = dateTimePickerSprzedaz.Value;
+            DateTime _termin_platnosci = dateTimePickerTermin.Value;
 
             // do inserta do tabeli FAKTUR
-            
+
             faktura.id_sprzedawca = FakturniakConfig.xmlFakturniakConfig.id_zarejestrowany;
             faktura.id_nabywca = nabywca.id_kontrahenta;
 
             faktura.numer_faktury = __numer_faktury;
-            faktura.data_wystawienia = _data_wystawienia;
-            faktura.data_sprzedazy = _data_sprzedazy;
+            faktura.data_wystawienia = _data_wystawienia.ToString("MM.dd.yyyy");
+            faktura.data_sprzedazy = _data_sprzedazy.ToString("MM.dd.yyyy");
             faktura.miejsce_wystawienia = textBoxWystawienie.Text;
             faktura.id_sposob_platnosci = sposob_platnosci.id_sposob_platnosci;
-            faktura.termin_platnosci = _termin_platnosci;
+            faktura.termin_platnosci = _termin_platnosci.ToString("MM.dd.yyyy");
             // dodawaj również numer konta kiedyś do faktury, żeby na podglądzie
             // był ten sam
 
@@ -352,7 +354,13 @@ namespace FakturniakUI
 
         void PodgladDruk()
         {
-            FakturaViewer fakturaViewer = new FakturaViewer(faktura, produktyFaktury, sprzedawca, nabywca);
+            FakturaViewer fakturaViewer = new FakturaViewer(faktura, 
+                produktyFaktury, 
+                sprzedawca, nabywca, 
+                kompletne_obiekty_produkty,
+                LabelTypFaktury.Text,
+                sposob_platnosci.nazwa,
+                do_zaplaty);
             fakturaViewer.ShowDialog();
         }
 

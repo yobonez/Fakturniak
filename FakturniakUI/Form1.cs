@@ -62,5 +62,9 @@ namespace FakturniakUI
             formFaktura.Show();
         }
 
+        private void produktToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -27,6 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="FakturniakDBDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FakturniakDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Update="Report\FakturaViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -42,6 +47,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="FakturniakDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FakturniakDBDataSet.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
