@@ -17,7 +17,6 @@
 */
 
 using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace FakturniakUI.Config
@@ -31,6 +30,8 @@ namespace FakturniakUI.Config
         {
             id_zarejestrowany = -1,
             ostatni_zalogowany_uzytkownik = "Administrator",
+            ostanie_miasto_wystawiania = "",
+            ostatni_sposob_platnosci = "",
             logo_path = ""
         };
 
@@ -50,8 +51,6 @@ namespace FakturniakUI.Config
             {
                 Write(filename, xmlFakturniakConfig);
             }
-
-            //return xmlFakturniakConfig;
         }
 
         public static void Write(string filename, FakturniakConfigModel confModel)

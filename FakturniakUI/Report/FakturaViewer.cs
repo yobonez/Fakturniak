@@ -22,6 +22,7 @@ namespace FakturniakUI
         private string typ_faktury;
         private string sposob_platnosci;
         private Decimal do_zaplaty;
+        private int czy_podglad;
 
 
         public FakturaViewer(ModelFaktura _faktura, 
@@ -31,7 +32,8 @@ namespace FakturniakUI
             List<object[]> _kompletne_szczegoly_produkty,
             string _typ_faktury,
             string _sposob_platnosci,
-            Decimal _do_zaplaty)
+            Decimal _do_zaplaty,
+            int _czy_podglad)
         {
             InitializeComponent();
 
@@ -44,6 +46,7 @@ namespace FakturniakUI
             sposob_platnosci = _sposob_platnosci;
             do_zaplaty = _do_zaplaty;
             typ_faktury = _typ_faktury;
+            czy_podglad = _czy_podglad;
 
 
             faktura.numer_faktury = typ_faktury + faktura.numer_faktury.Remove(0, 2);
@@ -93,6 +96,7 @@ namespace FakturniakUI
                 image = Convert.ToBase64String(ms.ToArray());
             }
             paramCollection.Add(new ReportParameter("image", image));
+            paramCollection.Add(new ReportParameter("pdgld", czy_podglad.ToString()));
 
             FakturniakDBDataSet ds = new FakturniakDBDataSet();
             DataTable dt = ds.Tables["ProduktyFaktury"];
@@ -103,13 +107,20 @@ namespace FakturniakUI
                 ++lp;
                 var row = dt.NewRow();
 
+                if (produkt[6].ToString().Length == 3)
+                    produkt[6] = produkt[6].ToString().Remove(0, 1);
+
+                string stawka = produkt[6].ToString();
+                if (stawka[0] == '0')
+                    produkt[6] = stawka.Remove(0, 1);
+
                 row["lp"] = lp;
                 row["nazwa"] = produkt[1];
                 row["jednostka"] = produkt[2];
                 row["ilosc"] = Int32.Parse(produkt[3].ToString());
                 row["netto"] = produkt[4];
                 row["brutto"] = produkt[5];
-                row["STVAT"] = produkt[6];
+                row["STVAT"] = produkt[6] + "%";
                 row["KWVAT"] = produkt[7];
                 row["WBrutto"] = produkt[8];
 

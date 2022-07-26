@@ -34,6 +34,8 @@ namespace FakturniakUI
             this.labelBrutto = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelProduktUsluga
@@ -92,12 +94,36 @@ namespace FakturniakUI
             this.label4.TabIndex = 9;
             this.label4.Text = "label4";
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoEllipsis = true;
+            this.label1.Location = new System.Drawing.Point(317, -1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 15);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "zł";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoEllipsis = true;
+            this.label2.Location = new System.Drawing.Point(394, -1);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(15, 15);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "zł";
+            // 
             // UCProdukt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.labelBrutto);
@@ -121,5 +147,7 @@ namespace FakturniakUI
         private System.Windows.Forms.Label labelBrutto;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

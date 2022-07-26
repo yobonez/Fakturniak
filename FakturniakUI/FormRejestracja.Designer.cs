@@ -38,21 +38,15 @@ namespace FakturniakUI
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -72,6 +66,12 @@ namespace FakturniakUI
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button5 = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
+            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox5 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox6 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox7 = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -163,20 +163,6 @@ namespace FakturniakUI
             this.label6.TabIndex = 8;
             this.label6.Text = "PESEL";
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(98, 109);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 23);
-            this.textBox4.TabIndex = 9;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(388, 41);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(121, 23);
-            this.textBox5.TabIndex = 11;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -187,13 +173,6 @@ namespace FakturniakUI
             this.label7.TabIndex = 10;
             this.label7.Text = "NIP";
             // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(388, 77);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(121, 23);
-            this.textBox6.TabIndex = 13;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -203,13 +182,6 @@ namespace FakturniakUI
             this.label8.Size = new System.Drawing.Size(52, 17);
             this.label8.TabIndex = 12;
             this.label8.Text = "REGON";
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(388, 110);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(121, 23);
-            this.textBox7.TabIndex = 15;
             // 
             // label9
             // 
@@ -227,13 +199,6 @@ namespace FakturniakUI
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(121, 23);
             this.textBox8.TabIndex = 16;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(388, 180);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(121, 23);
-            this.textBox9.TabIndex = 17;
             // 
             // label10
             // 
@@ -282,13 +247,6 @@ namespace FakturniakUI
             this.label13.TabIndex = 22;
             this.label13.Text = "Telefon";
             // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(98, 159);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(100, 23);
-            this.textBox11.TabIndex = 23;
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -318,11 +276,16 @@ namespace FakturniakUI
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.maskedTextBox7);
+            this.panel1.Controls.Add(this.maskedTextBox3);
+            this.panel1.Controls.Add(this.maskedTextBox2);
+            this.panel1.Controls.Add(this.maskedTextBox6);
             this.panel1.Controls.Add(this.textBox12);
             this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.maskedTextBox5);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.textBox11);
+            this.panel1.Controls.Add(this.maskedTextBox4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label4);
@@ -333,15 +296,10 @@ namespace FakturniakUI
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.textBox4);
-            this.panel1.Controls.Add(this.textBox9);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.textBox8);
-            this.panel1.Controls.Add(this.textBox5);
-            this.panel1.Controls.Add(this.textBox7);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.textBox6);
             this.panel1.Location = new System.Drawing.Point(19, 79);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(518, 248);
@@ -353,7 +311,7 @@ namespace FakturniakUI
             this.panel2.Controls.Add(this.label16);
             this.panel2.Controls.Add(this.maskedTextBox1);
             this.panel2.Controls.Add(this.label15);
-            this.panel2.Location = new System.Drawing.Point(182, 73);
+            this.panel2.Location = new System.Drawing.Point(157, 73);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(244, 149);
             this.panel2.TabIndex = 26;
@@ -422,7 +380,7 @@ namespace FakturniakUI
             this.panel3.Controls.Add(this.button4);
             this.panel3.Controls.Add(this.label17);
             this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(12, 69);
+            this.panel3.Location = new System.Drawing.Point(12, 76);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(556, 254);
             this.panel3.TabIndex = 30;
@@ -502,17 +460,65 @@ namespace FakturniakUI
             this.label19.Text = "Domyślne hasło konta \"Administrator\" to $administrator$";
             this.label19.Visible = false;
             // 
+            // maskedTextBox2
+            // 
+            this.maskedTextBox2.Location = new System.Drawing.Point(98, 111);
+            this.maskedTextBox2.Mask = "00000000000";
+            this.maskedTextBox2.Name = "maskedTextBox2";
+            this.maskedTextBox2.Size = new System.Drawing.Size(100, 23);
+            this.maskedTextBox2.TabIndex = 26;
+            // 
+            // maskedTextBox3
+            // 
+            this.maskedTextBox3.Location = new System.Drawing.Point(98, 158);
+            this.maskedTextBox3.Mask = "+48000000000";
+            this.maskedTextBox3.Name = "maskedTextBox3";
+            this.maskedTextBox3.Size = new System.Drawing.Size(100, 23);
+            this.maskedTextBox3.TabIndex = 33;
+            // 
+            // maskedTextBox4
+            // 
+            this.maskedTextBox4.Location = new System.Drawing.Point(388, 41);
+            this.maskedTextBox4.Mask = "0000000000";
+            this.maskedTextBox4.Name = "maskedTextBox4";
+            this.maskedTextBox4.Size = new System.Drawing.Size(121, 23);
+            this.maskedTextBox4.TabIndex = 34;
+            // 
+            // maskedTextBox5
+            // 
+            this.maskedTextBox5.Location = new System.Drawing.Point(388, 77);
+            this.maskedTextBox5.Mask = "00000000000000";
+            this.maskedTextBox5.Name = "maskedTextBox5";
+            this.maskedTextBox5.Size = new System.Drawing.Size(121, 23);
+            this.maskedTextBox5.TabIndex = 35;
+            // 
+            // maskedTextBox6
+            // 
+            this.maskedTextBox6.Location = new System.Drawing.Point(388, 110);
+            this.maskedTextBox6.Mask = "0000000000";
+            this.maskedTextBox6.Name = "maskedTextBox6";
+            this.maskedTextBox6.Size = new System.Drawing.Size(121, 23);
+            this.maskedTextBox6.TabIndex = 36;
+            // 
+            // maskedTextBox7
+            // 
+            this.maskedTextBox7.Location = new System.Drawing.Point(388, 181);
+            this.maskedTextBox7.Mask = "00-000";
+            this.maskedTextBox7.Name = "maskedTextBox7";
+            this.maskedTextBox7.Size = new System.Drawing.Size(121, 23);
+            this.maskedTextBox7.TabIndex = 37;
+            // 
             // FormRejestracja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 368);
-            this.Controls.Add(this.label19);
             this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
@@ -545,21 +551,15 @@ namespace FakturniakUI
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Button button1;
@@ -579,5 +579,11 @@ namespace FakturniakUI
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox7;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox3;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox6;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox5;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox4;
     }
 }

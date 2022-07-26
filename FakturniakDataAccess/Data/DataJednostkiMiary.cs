@@ -18,6 +18,7 @@
 
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,10 +33,10 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        /*
-        public Task<IEnumerable<ModelStawkaVAT>> Get() =>
-            _db.LoadData<ModelStawkaVAT, dynamic>("dbo.spProdukty_GetAll", new { });
-        */
+        
+        public Task<IEnumerable<ModelJednostkaMiary>> Get() =>
+            _db.LoadData<ModelJednostkaMiary, dynamic>("dbo.spJednostkiMiary_GetAll", new { });
+        
         public Task Insert(ModelJednostkaMiary jm) =>
             _db.SaveData(
                 "dbo.spJednostkiMiary_Add",

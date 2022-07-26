@@ -16,14 +16,25 @@
     along with Fakturniak.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace FakturniakUI.Config
+using FakturniakDataAccess.DbAccess;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace FakturniakDataAccess.Data
 {
-    public class FakturniakConfigModel
+    public class DataUzytkownik : IDataUzytkownik
     {
-        public int id_zarejestrowany { get; set; }
-        public string ostatni_zalogowany_uzytkownik { get; set; }
-        public string ostanie_miasto_wystawiania { get; set; }
-        public string ostatni_sposob_platnosci { get; set; }
-        public string logo_path { get; set; }
+        private readonly ISqlDataAccess _db;
+
+        public DataUzytkownik(ISqlDataAccess db)
+        {
+            _db = db;
+        }
+
+        public async Task<string> GetUzytkownik()
+        {
+            var result = await _db.LoadData<string, dynamic>("dbo.spGetUser", new { });
+            return result.FirstOrDefault();
+        }
     }
 }

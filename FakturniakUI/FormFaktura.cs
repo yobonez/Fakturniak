@@ -40,10 +40,6 @@ namespace FakturniakUI
         
         string __numer_faktury = "";
 
-        //DateTime data_wystawienia = new DateTime();
-        //DateTime data_wykonania = new DateTime();
-        //DateTime termin_platnosci = new DateTime();
-
         ModelFaktura faktura = new ModelFaktura();
         List<ModelMTMFakturaProdukt> produktyFaktury = new List<ModelMTMFakturaProdukt>();
 
@@ -97,6 +93,9 @@ namespace FakturniakUI
             textBox1.Text = __numer_faktury.Substring(3, 3);
             string toDateTime = __numer_faktury.Substring(7, 7);
             dateTimePicker1.Value = DateTime.Parse(toDateTime);
+
+            textBoxWystawienie.Text = FakturniakConfig.xmlFakturniakConfig.ostanie_miasto_wystawiania;
+            comboBoxMetodyPlatnosci.Text = FakturniakConfig.xmlFakturniakConfig.ostatni_sposob_platnosci;
         }
 
 
@@ -292,6 +291,7 @@ namespace FakturniakUI
                 Decimal kwota_xilosc_netto = kwota_jeden_netto * ilosc;
 
 
+
                 Row.Cells["KVAT"].Value = kwota_xilosc_brutto - kwota_xilosc_netto;
                 Row.Cells["WBrutto"].Value = kwota_xilosc_brutto;
 
@@ -335,6 +335,11 @@ namespace FakturniakUI
             faktura.uwagi = richTextBoxUwagi.Text;
             faktura.uwagi_wewnetrzne = richTextBoxUwagiWewnetrzne.Text;
 
+            if (faktura.uwagi == "")
+                faktura.uwagi = "Brak";
+            if (faktura.uwagi_wewnetrzne == "")
+                faktura.uwagi_wewnetrzne = "Brak";
+
             // do inserta do tabeli PRODUKTÓW FAKURY
             foreach (DataGridViewRow Row in this.dataGridViewMTMProdukty.Rows)
             {
@@ -352,7 +357,7 @@ namespace FakturniakUI
             }
         }
 
-        void PodgladDruk()
+        void PodgladDruk(int podglad)
         {
             FakturaViewer fakturaViewer = new FakturaViewer(faktura, 
                 produktyFaktury, 
@@ -360,7 +365,8 @@ namespace FakturniakUI
                 kompletne_obiekty_produkty,
                 LabelTypFaktury.Text,
                 sposob_platnosci.nazwa,
-                do_zaplaty);
+                do_zaplaty,
+                podglad);
             fakturaViewer.ShowDialog();
         }
 
@@ -436,6 +442,19 @@ namespace FakturniakUI
         }
         private void Wystaw_Click(object sender, EventArgs e)
         {
+            // tak wiem, ten config by mozna bylo inaczej dac zeby po prostu jedna rzecz dawal, a nie ze wszystko z powodu
+            // jednej lub dwóch rzeczy, moze potem to zrobie
+            FakturniakConfigModel fakturniakConfigModel = new FakturniakConfigModel()
+            {
+                ostanie_miasto_wystawiania = textBoxWystawienie.Text,
+                ostatni_sposob_platnosci = comboBoxMetodyPlatnosci.Text,
+
+                id_zarejestrowany = FakturniakConfig.xmlFakturniakConfig.id_zarejestrowany,
+                logo_path = FakturniakConfig.xmlFakturniakConfig.logo_path,
+                ostatni_zalogowany_uzytkownik = FakturniakConfig.xmlFakturniakConfig.ostatni_zalogowany_uzytkownik
+            };
+            FakturniakConfig.Write("FakturniakConfig.xml", fakturniakConfigModel);
+
             DialogResult dialogResult = MessageBox.Show(this, "Jesteś pewien, że chcesz wystawić tą fakturę? \nPrzed wystawieniem upewnij się, czy wszystkie wpisane dane są poprawne.", "Ostrzeżenie", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (dialogResult != DialogResult.OK)
                 this.Focus();
@@ -460,15 +479,24 @@ namespace FakturniakUI
             if (drukResult != DialogResult.Yes)
                 this.Focus();
             else
-                PodgladDruk();
+                PodgladDruk(0);
         }
 
         private void Podglad_Click(object sender, EventArgs e)
         {
-            // narazie ogarne sobie podgląd i wydruk PO wystawieniu, bo wtedy mam dostęp do danych w bazie
-            // a tu potem pokombinuję jak zrobić tymczasowe rekordy, które bym mógł wypełnić
+            FakturniakConfigModel fakturniakConfigModel = new FakturniakConfigModel()
+            {
+                ostanie_miasto_wystawiania = textBoxWystawienie.Text,
+                ostatni_sposob_platnosci = comboBoxMetodyPlatnosci.Text,
+
+                id_zarejestrowany = FakturniakConfig.xmlFakturniakConfig.id_zarejestrowany,
+                logo_path = FakturniakConfig.xmlFakturniakConfig.logo_path,
+                ostatni_zalogowany_uzytkownik = FakturniakConfig.xmlFakturniakConfig.ostatni_zalogowany_uzytkownik
+            };
+            FakturniakConfig.Write("FakturniakConfig.xml", fakturniakConfigModel);
+
             ZaladujDaneZFaktury();
-            PodgladDruk();
+            PodgladDruk(1);
         }
     }
 }

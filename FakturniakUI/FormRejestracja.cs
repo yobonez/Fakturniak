@@ -51,7 +51,7 @@ namespace FakturniakUI
         {
             if (obecny_krok == 0)
             {
-                if (textBox1.Text == "" || textBox2.Text == "" || textBox4.Text == "")
+                if (textBox1.Text == "" || textBox2.Text == "" || maskedTextBox2.Text == "")
                 {
                     MessageBox.Show(this, "Pola: \"Imię\", \"Nazwisko\", oraz \"PESEL\" muszą być wypełnione.", "Błąd przy wprowadzaniu danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -61,12 +61,12 @@ namespace FakturniakUI
                     MessageBox.Show(this, "Pole: \"Nazwa\" musi być wypełnione.", "Błąd przy wprowadzaniu danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                else if (textBox5.Text == "" && textBox6.Text == "" && textBox7.Text == "")
+                else if (maskedTextBox4.Text == "" && maskedTextBox5.Text == "" && maskedTextBox6.Text == "")
                 {
                     MessageBox.Show(this, "Jedno z pól: NIP, REGON lub KRS musi być wypełnione.", "Błąd przy wprowadzaniu danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                else if (textBox8.Text == "" || textBox9.Text == "" || textBox10.Text == "")
+                else if (textBox8.Text == "" || maskedTextBox7.Text == "" || textBox10.Text == "")
                 {
                     MessageBox.Show(this, "Pola: \"Adres\", \"Kod pocztowy\" oraz \"Miasto\" muszą być wypełnione.", "Błąd przy wprowadzaniu danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -196,14 +196,14 @@ namespace FakturniakUI
                 imie = textBox1.Text,
                 nazwisko = textBox2.Text,
                 nazwa = textBox3.Text,
-                nip = textBox5.Text,
-                regon = textBox6.Text,
-                krs = textBox7.Text,
-                pesel = textBox4.Text,
+                nip = maskedTextBox4.Text,
+                regon = maskedTextBox5.Text,
+                krs = maskedTextBox6.Text,
+                pesel = maskedTextBox2.Text,
                 email = textBox12.Text,
-                telefon = textBox11.Text,
+                telefon = maskedTextBox3.Text,
                 adres = textBox8.Text,
-                kod_pocztowy = textBox9.Text,
+                kod_pocztowy = maskedTextBox7.Text,
                 miasto = textBox10.Text,
                 numer_konta = maskedTextBox1.Text,
                 swift = textBox13.Text

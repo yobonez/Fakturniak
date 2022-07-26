@@ -19,6 +19,9 @@
 using System;
 using System.Windows.Forms;
 using FakturniakUI.Config;
+//using FakturniakDataAccess.DbAccess;
+//using FakturniakDataAccess.Data;
+//using System.Threading.Tasks;
 
 namespace FakturniakUI
 {
@@ -28,12 +31,8 @@ namespace FakturniakUI
         {
             InitializeComponent();
         }
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            //FakturniakConfig cfg = new FakturniakConfig();
-            //FakturniakConfigModel cfgModel = new FakturniakConfigModel(); // 19.07
-
-            // 20.07 config jako klasa statyczna
             FakturniakConfig.Load("FakturniakConfig.xml");
 
             if (FakturniakConfig.xmlFakturniakConfig.id_zarejestrowany > 0)
@@ -53,6 +52,14 @@ namespace FakturniakUI
             }
 
             this.CenterToScreen();
+
+            label1.Text = "Witaj, " + FakturniakConfig.xmlFakturniakConfig.ostatni_zalogowany_uzytkownik + "!";
+            /*
+            ISqlDataAccess dataAccess = new SqlDataAccess(FakturniakConfig.username, FakturniakConfig.pass);
+            IDataUzytkownik dataUzytkownik = new DataUzytkownik(dataAccess);
+
+            await Task.Run(() => label1.Text = dataUzytkownik.GetUzytkownik().Result);
+            */
         }
 
         private void NowaFaktura_Click(object sender, EventArgs e)
@@ -64,7 +71,20 @@ namespace FakturniakUI
 
         private void produktToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FormNowyProdukt formProdutkt = new FormNowyProdukt();
+            formProdutkt.Show();
+        }
 
+        private void kontrahentaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormNowyKontrahent formKontrahent = new FormNowyKontrahent();
+            formKontrahent.Show();
+        }
+
+        private void sposóbPłatnościToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormNowySposobPlatnosci formNowySposobPlatnosci = new FormNowySposobPlatnosci();
+            formNowySposobPlatnosci.Show();
         }
     }
 }

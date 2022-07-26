@@ -17,6 +17,7 @@
 */
 
 using FakturniakDataAccess.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FakturniakDataAccess.Data
@@ -24,6 +25,7 @@ namespace FakturniakDataAccess.Data
     public interface IDataJednostkiMiary
     {
         Task Delete(int _id_jednostki);
+        Task<IEnumerable<ModelJednostkaMiary>> Get();
         Task Insert(ModelJednostkaMiary jm);
         Task<ModelJednostkaMiary> Load(int _id_jednostki);
     }

@@ -40,7 +40,7 @@ namespace FakturniakDataAccess.Data
         public Task Insert(ModelSposobPlatnosci sp) =>
             _db.SaveData(
                 "dbo.spSposobyPlatnosci_Add",
-                new { sp.id_sposob_platnosci, sp.nazwa });
+                new { sp.nazwa });
         public Task Delete(int _id_sposob_platnosci) =>
             _db.SaveData("dbo.spSposobyPlatnosci_Delete", new { id_sposob_platnosci = _id_sposob_platnosci });
 
