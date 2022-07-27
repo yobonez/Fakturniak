@@ -18,10 +18,11 @@
 
 using Dapper;
 using System.Data;
-using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using FakturniakDataAccess.Status;
+
 
 namespace FakturniakDataAccess.DbAccess
 {
@@ -40,15 +41,16 @@ namespace FakturniakDataAccess.DbAccess
         public async Task<IEnumerable<T>> LoadData<T, U>(string storedProcedure, U parameters)
         {
             using IDbConnection connection = new SqlConnection(cnnStr);
-
+            FakturniakStatus.zapytanie = true;
             return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task SaveData<T>(string storedProcedure, T parameters)
         {
             using IDbConnection connection = new SqlConnection(cnnStr);
-
+            FakturniakStatus.zapytanie = true;
             await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+            FakturniakStatus.zapytanie = false;
         }
     }
 }

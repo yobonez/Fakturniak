@@ -18,6 +18,7 @@
 
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using FakturniakDataAccess.Status;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,8 +35,12 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        public Task<IEnumerable<ModelStawkaVAT>> Get() =>
-            _db.LoadData<ModelStawkaVAT, dynamic>("dbo.spStawkiVAT_GetAll", new { });
+        public Task<IEnumerable<ModelStawkaVAT>> Get()
+        {
+            var result = _db.LoadData<ModelStawkaVAT, dynamic>("dbo.spStawkiVAT_GetAll", new { });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
 
         public Task Insert(ModelStawkaVAT sv) =>
             _db.SaveData(
@@ -47,6 +52,7 @@ namespace FakturniakDataAccess.Data
         public async Task<ModelStawkaVAT?> Load(int _id_stawki)
         {
             var results = await _db.LoadData<ModelStawkaVAT, dynamic>("dbo.spStawkiVAT_GetById", new { id_stawki = _id_stawki });
+            FakturniakStatus.zapytanie = false;
             return results.FirstOrDefault();
         }
 

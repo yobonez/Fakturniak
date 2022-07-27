@@ -18,6 +18,7 @@
 
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using FakturniakDataAccess.Status;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,9 +34,13 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        
-        public Task<IEnumerable<ModelJednostkaMiary>> Get() =>
-            _db.LoadData<ModelJednostkaMiary, dynamic>("dbo.spJednostkiMiary_GetAll", new { });
+
+        public Task<IEnumerable<ModelJednostkaMiary>> Get()
+        {
+            var result = _db.LoadData<ModelJednostkaMiary, dynamic>("dbo.spJednostkiMiary_GetAll", new { });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
         
         public Task Insert(ModelJednostkaMiary jm) =>
             _db.SaveData(
@@ -47,6 +52,7 @@ namespace FakturniakDataAccess.Data
         public async Task<ModelJednostkaMiary?> Load(int _id_jednostki)
         {
             var results = await _db.LoadData<ModelJednostkaMiary, dynamic>("dbo.spJednostkiMiary_GetById", new { id_jednostki = _id_jednostki });
+            FakturniakStatus.zapytanie = false;
             return results.FirstOrDefault();
         }
 

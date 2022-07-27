@@ -17,21 +17,27 @@
 */
 
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using FakturniakDataAccess.Data;
+using FakturniakDataAccess.DbAccess;
+using FakturniakDataAccess.Models;
+using FakturniakDataAccess.Status;
 using FakturniakUI.Config;
-//using FakturniakDataAccess.DbAccess;
-//using FakturniakDataAccess.Data;
-//using System.Threading.Tasks;
 
 namespace FakturniakUI
 {
     public partial class Form1 : Form
     {
+        IEnumerable<ModelPrzychody> _przychody;
+        IDataPrzychody dataPrzychody;
+
         public Form1()
         {
             InitializeComponent();
         }
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             FakturniakConfig.Load("FakturniakConfig.xml");
 
@@ -53,18 +59,15 @@ namespace FakturniakUI
 
             this.CenterToScreen();
 
+            FakturniakStatus.refreshMenu = true;
+            timer1.Enabled = true;
+            timer2.Enabled = true;
+            pictureBox1.ImageLocation = FakturniakConfig.xmlFakturniakConfig.logo_path;
             label1.Text = "Witaj, " + FakturniakConfig.xmlFakturniakConfig.ostatni_zalogowany_uzytkownik + "!";
-            /*
-            ISqlDataAccess dataAccess = new SqlDataAccess(FakturniakConfig.username, FakturniakConfig.pass);
-            IDataUzytkownik dataUzytkownik = new DataUzytkownik(dataAccess);
-
-            await Task.Run(() => label1.Text = dataUzytkownik.GetUzytkownik().Result);
-            */
         }
 
         private void NowaFaktura_Click(object sender, EventArgs e)
         {
-            // TODO: focus na Form1, jak zamkniesz okno faktur
             FormFaktura formFaktura = new FormFaktura();
             formFaktura.Show();
         }
@@ -85,6 +88,38 @@ namespace FakturniakUI
         {
             FormNowySposobPlatnosci formNowySposobPlatnosci = new FormNowySposobPlatnosci();
             formNowySposobPlatnosci.Show();
+        }
+        public async void RefreshMenu(SqlDataAccess dataAccess)
+        {
+            dataPrzychody = new DataPrzychody(dataAccess);
+
+            await Task.Run(() => _przychody = dataPrzychody.Get().Result);
+
+            Decimal decimalPrzychody = 0.0M;
+            foreach (ModelPrzychody przychod in _przychody)
+            {
+                decimalPrzychody = decimalPrzychody + przychod.Suma;
+            }
+
+            label2.Text = decimalPrzychody.ToString() + " PLN";
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (FakturniakStatus.zapytanie) { status.Text = "Wysyłam zapytanie do bazy...";  timer1.Interval = 350; }
+            else { status.Text = "Gotowy"; timer1.Interval = 1;};
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusBarGodzina.Text = DateTime.Now.ToShortTimeString();
+            if (FakturniakStatus.refreshMenu)
+            {
+                ISqlDataAccess dataAccess = new SqlDataAccess(FakturniakConfig.username, FakturniakConfig.pass);
+                RefreshMenu((SqlDataAccess)dataAccess);
+
+                FakturniakStatus.refreshMenu = false;
+            }
         }
     }
 }

@@ -16,6 +16,8 @@
     along with Fakturniak.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System;
+
 namespace FakturniakUI.Config
 {
     public class FakturniakConfigModel
@@ -24,6 +26,7 @@ namespace FakturniakUI.Config
         public string ostatni_zalogowany_uzytkownik { get; set; }
         public string ostanie_miasto_wystawiania { get; set; }
         public string ostatni_sposob_platnosci { get; set; }
+        public Decimal obecny_przychod { get; set; }
         public string logo_path { get; set; }
     }
 }

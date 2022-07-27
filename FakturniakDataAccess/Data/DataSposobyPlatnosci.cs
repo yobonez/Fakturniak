@@ -18,6 +18,7 @@
 
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using FakturniakDataAccess.Status;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,8 +35,12 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        public Task<IEnumerable<ModelSposobPlatnosci>> Get() =>
-            _db.LoadData<ModelSposobPlatnosci, dynamic>("dbo.spSposobyPlatnosci_GetAll", new { });
+        public Task<IEnumerable<ModelSposobPlatnosci>> Get()
+        {
+            var result = _db.LoadData<ModelSposobPlatnosci, dynamic>("dbo.spSposobyPlatnosci_GetAll", new { });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
 
         public Task Insert(ModelSposobPlatnosci sp) =>
             _db.SaveData(
@@ -47,6 +52,7 @@ namespace FakturniakDataAccess.Data
         public async Task<ModelSposobPlatnosci?> Load(int _id_sposob_platnosci)
         {
             var results = await _db.LoadData<ModelSposobPlatnosci, dynamic>("dbo.spSposobyPlatnosci_GetById", new { id_sposob_platnosci = _id_sposob_platnosci });
+            FakturniakStatus.zapytanie = false;
             return results.FirstOrDefault();
         }
     }

@@ -18,6 +18,7 @@
 
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using FakturniakDataAccess.Status;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,18 +35,24 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        public Task<IEnumerable<ModelFaktura>> Get() =>
-            _db.LoadData<ModelFaktura, dynamic>("dbo.spFaktury_GetAll", new { });
+        public Task<IEnumerable<ModelFaktura>> Get()
+        {
+            var result = _db.LoadData<ModelFaktura, dynamic>("dbo.spFaktury_GetAll", new { });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
 
         public async Task<string> GetNumerFaktury(int? _numer, int _id_typu_faktury)
         {
             var result = await _db.LoadData<string, dynamic>("dbo.spGetNumerFaktury", new { numer = _numer, id_typu_faktury = _id_typu_faktury });
+            FakturniakStatus.zapytanie = false;
             return result.FirstOrDefault();
         }
 
         public async Task<ModelFaktura?> Load(string _numer_faktury)
         {
             var results = await _db.LoadData<ModelFaktura, dynamic>("dbo.spFaktury_GetByNumer", new { numer_faktury = _numer_faktury });
+            FakturniakStatus.zapytanie = false;
             return results.FirstOrDefault();
         }
 

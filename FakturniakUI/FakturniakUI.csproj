@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.17" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -25,8 +25,7 @@ using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
 using FakturniakDataAccess.Data;
 using FakturniakUI.Config;
-
-
+using FakturniakDataAccess.Status;
 
 namespace FakturniakUI
 {
@@ -67,7 +66,6 @@ namespace FakturniakUI
 
         private async void FormFaktura_Load(object sender, EventArgs e)
         {
-
             this.CenterToParent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -472,6 +470,8 @@ namespace FakturniakUI
                     dataMTMFakturaProdukt.Insert(faktura_produkt);
                 }
                 // KONIEC INSERTA
+
+                FakturniakStatus.refreshMenu = true;
             }
 
             MessageBox.Show(this, "Pomyślnie wystawiono fakturę.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);

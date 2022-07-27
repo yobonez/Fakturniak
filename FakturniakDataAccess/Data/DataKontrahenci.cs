@@ -18,6 +18,7 @@
 
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using FakturniakDataAccess.Status;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,12 +34,17 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        public Task<IEnumerable<ModelKontrahent>> Get() =>
-            _db.LoadData<ModelKontrahent, dynamic>("dbo.spKontrahenci_GetAll", new { });
+        public Task<IEnumerable<ModelKontrahent>> Get()
+        {
+            var result = _db.LoadData<ModelKontrahent, dynamic>("dbo.spKontrahenci_GetAll", new { });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
 
         public async Task<ModelKontrahent?> Load(int id)
         {
             var results = await _db.LoadData<ModelKontrahent, dynamic>("dbo.spKontrahenci_GetById", new { id_kontrahenta = id });
+            FakturniakStatus.zapytanie = false;
             return results.FirstOrDefault();
         }
 

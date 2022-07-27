@@ -17,26 +17,27 @@
 */
 
 using FakturniakDataAccess.DbAccess;
+using FakturniakDataAccess.Models;
 using FakturniakDataAccess.Status;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FakturniakDataAccess.Data
 {
-    public class DataUzytkownik : IDataUzytkownik
+    public class DataPrzychody : IDataPrzychody
     {
         private readonly ISqlDataAccess _db;
 
-        public DataUzytkownik(ISqlDataAccess db)
+        public DataPrzychody(ISqlDataAccess db)
         {
             _db = db;
         }
 
-        public async Task<string> GetUzytkownik()
+        public Task<IEnumerable<ModelPrzychody>> Get()
         {
-            var result = await _db.LoadData<string, dynamic>("dbo.spGetUser", new { });
+            var result = _db.LoadData<ModelPrzychody, dynamic>("dbo.spPrzychodyOgolem", new { });
             FakturniakStatus.zapytanie = false;
-            return result.FirstOrDefault();
+            return result;
         }
     }
 }

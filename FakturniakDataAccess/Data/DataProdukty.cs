@@ -18,6 +18,7 @@
 
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using FakturniakDataAccess.Status;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,12 +34,17 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        public Task<IEnumerable<ModelProdukt>> Get() =>
-            _db.LoadData<ModelProdukt, dynamic>("dbo.spProdukty_GetAll", new { });
+        public Task<IEnumerable<ModelProdukt>> Get()
+        {
+            var result = _db.LoadData<ModelProdukt, dynamic>("dbo.spProdukty_GetAll", new { });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
 
         public async Task<ModelProdukt?> Load(int _id_produktu)
         {
             var results = await _db.LoadData<ModelProdukt, dynamic>("dbo.spProdukty_GetByNumer", new { id_produktu = _id_produktu });
+            FakturniakStatus.zapytanie = false;
             return results.FirstOrDefault();
         }
 
@@ -55,8 +61,12 @@ namespace FakturniakDataAccess.Data
                 "dbo.spProdukty_AddByBrutto",
                 new { p.nazwa, p.cena_brutto, p.id_jednostki, p.id_stawki });
 
-        public Task<IEnumerable<ModelProdukt>> Search(string _input) =>
-            _db.LoadData<ModelProdukt, dynamic>("dbo.spProdukty_Search", new { input = _input });
+        public Task<IEnumerable<ModelProdukt>> Search(string _input)
+        {
+            var result = _db.LoadData<ModelProdukt, dynamic>("dbo.spProdukty_Search", new { input = _input });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
 
         public Task Delete(int _id_produktu) =>
             _db.SaveData("dbo.spProdukty_Delete", new { id_produktu = _id_produktu });

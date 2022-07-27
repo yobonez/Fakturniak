@@ -18,6 +18,7 @@
 
 using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using FakturniakDataAccess.Status;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,12 +35,17 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        public Task<IEnumerable<ModelMTMFakturaProdukt>> Get() =>
-            _db.LoadData<ModelMTMFakturaProdukt, dynamic>("dbo.spProdukty_GetAll", new { });
+        public Task<IEnumerable<ModelMTMFakturaProdukt>> Get()
+        {
+            var result = _db.LoadData<ModelMTMFakturaProdukt, dynamic>("dbo.spProdukty_GetAll", new { });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
 
         public async Task<ModelMTMFakturaProdukt?> Load(int _id_produktu)
         {
             var results = await _db.LoadData<ModelMTMFakturaProdukt, dynamic>("dbo.spProdukty_GetByNumer", new { id_produktu = _id_produktu });
+            FakturniakStatus.zapytanie = false;
             return results.FirstOrDefault();
         }
 
