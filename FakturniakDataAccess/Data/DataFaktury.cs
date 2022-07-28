@@ -56,6 +56,13 @@ namespace FakturniakDataAccess.Data
             return results.FirstOrDefault();
         }
 
+        public Task<IEnumerable<ModelFaktura>> Search(string _input)
+        {
+            var result = _db.LoadData<ModelFaktura, dynamic>("dbo.spFaktury_Search", new { input = _input });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
+
         public Task Insert(ModelFaktura f) =>
             _db.SaveData(
                 "dbo.spFaktury_Add",

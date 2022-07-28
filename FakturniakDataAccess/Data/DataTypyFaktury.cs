@@ -16,15 +16,31 @@
     along with Fakturniak.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
+using FakturniakDataAccess.Status;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FakturniakDataAccess.Data
 {
-    public interface IDataPrzychody
+
+    public class DataTypyFaktury : IDataTypyFaktury
     {
-        Task<IEnumerable<ModelPrzychod>> Get();
-        Task<IEnumerable<ModelPrzychod>> Search(string _input);
+        private readonly ISqlDataAccess _db;
+
+        public DataTypyFaktury(ISqlDataAccess db)
+        {
+            _db = db;
+        }
+        public async Task<ModelTypFaktury?> Load(int _id_typu_faktury)
+        {
+            var results = await _db.LoadData<ModelTypFaktury, dynamic>("dbo.spTypyFaktur_GetById", new { id_typu_faktury = _id_typu_faktury });
+            FakturniakStatus.zapytanie = false;
+            return results.FirstOrDefault();
+        }
     }
 }

@@ -28,5 +28,6 @@ namespace FakturniakDataAccess.Data
         Task<IEnumerable<ModelKontrahent>> Get();
         Task Insert(ModelKontrahent k);
         Task<ModelKontrahent> Load(int id);
+        Task<IEnumerable<ModelKontrahent>> Search(string _input);
     }
 }

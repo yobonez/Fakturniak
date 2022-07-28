@@ -27,107 +27,205 @@ using FakturniakDataAccess.DbAccess;
 using FakturniakDataAccess.Models;
 using FakturniakUI.Config;
 
+// w tym pliku pewnie możnabyło uniknąć powtarzalności kodu w lepszy sposób,
+// ale staż już się kończy, więc nie ma zbytnio czasu
 namespace FakturniakUI
 {
     public partial class FormSzukaj : Form
     {
-        public ModelKontrahent returnModelKontrahent = new ModelKontrahent();
+        public object returnModel;
 
         private string tabela;
 
         readonly ISqlDataAccess dataAccess = new SqlDataAccess(FakturniakConfig.username, FakturniakConfig.pass);
 
-        IEnumerable<ModelKontrahent> kontrahenci_enumerable;
-        List<ModelKontrahent> kontrahenci;
+        private IEnumerable<ModelKontrahent> kontrahenci_enumerable;
+        private IEnumerable<ModelPrzychod> faktury_enumerable;
+
+        private List<ModelKontrahent> kontrahenci;
+        private List<ModelPrzychod> faktury;
 
         public FormSzukaj(string _tabela)
         {
             InitializeComponent();
             tabela = _tabela;
         }
+
+        private object[] GetDataKontrahent(ModelKontrahent _kontrahent)
+        {
+            object[] kontrahentToAdd = new object[]
+            {
+                _kontrahent.id_kontrahenta,
+                _kontrahent.nazwa,
+                _kontrahent.imie,
+                _kontrahent.nazwisko,
+                _kontrahent.adres,
+                _kontrahent.kod_pocztowy,
+                _kontrahent.miasto,
+                _kontrahent.email,
+                _kontrahent.telefon,
+                _kontrahent.pesel,
+                _kontrahent.nip,
+                _kontrahent.krs,
+                _kontrahent.regon
+            };
+
+            return kontrahentToAdd;
+        }
+        private object[] GetDataFaktura(ModelPrzychod _faktura)
+        {
+            object[] fakturaToAdd = new object[]
+            {
+                _faktura.numer_faktury,
+                _faktura.Suma + " zł",
+            };
+
+            return fakturaToAdd;
+        }
+
         private async void FormSzukaj_Load(object sender, EventArgs e)
         {
             this.CenterToParent();
 
             if (tabela == "Kontrahenci")
             {
+                dataGridViewSzukaj.Rows.Clear();
+                dataGridViewSzukaj.Columns.Clear();
+
+                dataGridViewSzukaj.Columns.Add("ID", "ID");
+                dataGridViewSzukaj.Columns.Add("Nazwa", "Nazwa");
+                dataGridViewSzukaj.Columns.Add("Imie", "Imie");
+                dataGridViewSzukaj.Columns.Add("Nazwisko", "Nazwisko");
+                dataGridViewSzukaj.Columns.Add("Adres", "Adres");
+                dataGridViewSzukaj.Columns.Add("KodPocztowy", "Kod pocztowy");
+                dataGridViewSzukaj.Columns.Add("Miasto", "Miasto");
+                dataGridViewSzukaj.Columns.Add("email", "e-mail");
+                dataGridViewSzukaj.Columns.Add("telefon", "Telefon");
+                dataGridViewSzukaj.Columns.Add("NIP", "NIP");
+                dataGridViewSzukaj.Columns.Add("KRS", "KRS");
+                dataGridViewSzukaj.Columns.Add("REGON", "REGON");
+
                 IDataKontrahenci dataKontrahenci = new DataKontrahenci(dataAccess);
 
                 await Task.Run(() => kontrahenci_enumerable = dataKontrahenci.Get().Result);
                 kontrahenci = kontrahenci_enumerable.ToList();
 
-
                 foreach (ModelKontrahent kontrahent in kontrahenci)
                 {
-                    object[] kontrahentToAdd = new object[]
-                    {
-                        kontrahent.id_kontrahenta,
-                        kontrahent.nazwa,
-                        kontrahent.imie,
-                        kontrahent.nazwisko,
-                        kontrahent.adres,
-                        kontrahent.kod_pocztowy,
-                        kontrahent.miasto,
-                        kontrahent.email,
-                        kontrahent.telefon,
-                        kontrahent.pesel,
-                        kontrahent.nip,
-                        kontrahent.krs,
-                        kontrahent.regon
-                    };
+                    object[] kontrahentToAdd = GetDataKontrahent(kontrahent);
+                    dataGridViewSzukaj.Rows.Add(kontrahentToAdd);
+                }
+            }
 
-                    dataGridViewKontrahenci.Rows.Add(kontrahentToAdd);
+            if (tabela == "Faktury")
+            {
+                dataGridViewSzukaj.Rows.Clear();
+                dataGridViewSzukaj.Columns.Clear();
+
+                dataGridViewSzukaj.Columns.Add("numer_faktury", "Numer faktury");
+                dataGridViewSzukaj.Columns.Add("kwota", "Suma z faktury");
+
+                IDataPrzychody dataFaktury = new DataPrzychody(dataAccess);
+
+                await Task.Run(() => faktury_enumerable = dataFaktury.Get().Result);
+                faktury = faktury_enumerable.ToList();
+
+                foreach (ModelPrzychod faktura in faktury)
+                {
+                    object[] fakturaToAdd = GetDataFaktura(faktura);
+                    dataGridViewSzukaj.Rows.Add(fakturaToAdd);
                 }
             }
         }
 
-        private void textBoxSzukaj_TextChanged(object sender, EventArgs e)
+        private async void textBoxSzukaj_TextChanged(object sender, EventArgs e)
         {
-            // 14.07
-            // todo
+            dataGridViewSzukaj.Rows.Clear();
+            dataGridViewSzukaj.Refresh();
+
+            if (tabela == "Kontrahenci")
+            {
+                IDataKontrahenci dataKontrahenci = new DataKontrahenci(dataAccess);
+
+                await Task.Run(() => kontrahenci_enumerable = dataKontrahenci.Search(textBoxSzukaj.Text).Result);
+                kontrahenci = kontrahenci_enumerable.ToList();
+
+                foreach (ModelKontrahent kontrahent in kontrahenci)
+                {
+                    object[] kontrahentToAdd = GetDataKontrahent(kontrahent);
+                    dataGridViewSzukaj.Rows.Add(kontrahentToAdd);
+                }
+            }
+
+            if (tabela == "Faktury")
+            {
+                IDataPrzychody dataFaktury = new DataPrzychody(dataAccess);
+
+                await Task.Run(() => faktury_enumerable = dataFaktury.Search(textBoxSzukaj.Text).Result);
+                faktury = faktury_enumerable.ToList();
+
+                foreach (ModelPrzychod faktura in faktury)
+                {
+                    object[] fakturaToAdd = GetDataFaktura(faktura);
+                    dataGridViewSzukaj.Rows.Add(fakturaToAdd);
+                }
+            }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void dataGridViewKontrahenci_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int index = dataGridViewKontrahenci.CurrentCell.RowIndex;
-
-            dataGridViewKontrahenci.Rows[index].Selected = true;
-        }
-
         private void buttonWybierz_Click(object sender, EventArgs e)
         {
-            if (dataGridViewKontrahenci.SelectedRows.Count > 1)
-                MessageBox.Show(this, "Nie możesz wybrać więcej niż jednego     odbiorcy.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else
+            if (tabela == "Kontrahenci")
             {
-                foreach (DataGridViewRow rowKontrahent in dataGridViewKontrahenci.Rows)
+                if (dataGridViewSzukaj.SelectedRows.Count > 1)
+                    MessageBox.Show(this, "Nie możesz wybrać więcej niż jednego odbiorcy.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
                 {
-                    if (rowKontrahent.Selected)
+                    foreach (DataGridViewRow row in dataGridViewSzukaj.Rows)
                     {
-                        returnModelKontrahent = new ModelKontrahent
+                        if (row.Selected)
                         {
-                            id_kontrahenta = Convert.ToInt32(rowKontrahent.Cells["ID"].Value),
-                            imie = Convert.ToString(rowKontrahent.Cells["Imie"].Value),
-                            nazwisko = Convert.ToString(rowKontrahent.Cells["Nazwisko"].Value),
-                            nazwa = Convert.ToString(rowKontrahent.Cells["Nazwa"].Value),
-                            pesel = Convert.ToString(rowKontrahent.Cells["PESEL"].Value),
-                            nip = Convert.ToString(rowKontrahent.Cells["NIP"].Value),
-                            krs = Convert.ToString(rowKontrahent.Cells["KRS"].Value),
-                            regon = Convert.ToString(rowKontrahent.Cells["REGON"].Value),
-                            adres = Convert.ToString(rowKontrahent.Cells["Adres"].Value),
-                            miasto = Convert.ToString(rowKontrahent.Cells["Miasto"].Value),
-                            kod_pocztowy = Convert.ToString(rowKontrahent.Cells["KodPocztowy"].Value)
-                        };
+                            foreach (ModelKontrahent kontrahent in kontrahenci)
+                            {
+                                int id_kontrahenta = Int32.Parse(row.Cells["ID"].Value.ToString());
+                                if (id_kontrahenta == kontrahent.id_kontrahenta) returnModel = kontrahent;
+                            }
 
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
+                    }
+                }
+            }
+
+            if (tabela == "Faktury")
+            {
+                if (dataGridViewSzukaj.SelectedRows.Count > 1)
+                    MessageBox.Show(this, "Nie możesz wybrać więcej niż jednego odbiorcy.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                {
+                    foreach (DataGridViewRow row in dataGridViewSzukaj.Rows)
+                    {
+                        if (row.Selected)
+                        {
+                            foreach (ModelPrzychod faktura in faktury)
+                            {
+                                string numer_faktury = row.Cells["numer_faktury"].Value.ToString();
+                                if (numer_faktury == faktura.numer_faktury) returnModel = faktura;
+                            }
+
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                     }
                 }
             }
         }
+
+        private void dataGridViewKontrahenci_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = dataGridViewSzukaj.CurrentCell.RowIndex;
+
+            dataGridViewSzukaj.Rows[index].Selected = true;
+        }
+
     }
 }

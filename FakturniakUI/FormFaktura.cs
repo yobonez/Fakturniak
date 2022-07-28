@@ -312,6 +312,9 @@ namespace FakturniakUI
 
         void ZaladujDaneZFaktury()
         {
+            produktyFaktury = new List<ModelMTMFakturaProdukt>(); // Bug z duplikowaniem produktów z każdym razem, gdy się kliknie podgląd 
+                                                                  // został własnie naprawiony :)
+
             DateTime _data_wystawienia = dateTimePickerWystawienie.Value;
             DateTime _data_sprzedazy = dateTimePickerSprzedaz.Value;
             DateTime _termin_platnosci = dateTimePickerTermin.Value;
@@ -327,8 +330,6 @@ namespace FakturniakUI
             faktura.miejsce_wystawienia = textBoxWystawienie.Text;
             faktura.id_sposob_platnosci = sposob_platnosci.id_sposob_platnosci;
             faktura.termin_platnosci = _termin_platnosci.ToString("MM.dd.yyyy");
-            // dodawaj również numer konta kiedyś do faktury, żeby na podglądzie
-            // był ten sam
 
             faktura.uwagi = richTextBoxUwagi.Text;
             faktura.uwagi_wewnetrzne = richTextBoxUwagiWewnetrzne.Text;
@@ -393,7 +394,7 @@ namespace FakturniakUI
 
                 if(result == DialogResult.OK)
                 {
-                    nabywca = formSzukaj.returnModelKontrahent;
+                    nabywca = (ModelKontrahent)formSzukaj.returnModel;
                     formSzukaj.Dispose();
                 }
             }

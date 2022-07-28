@@ -47,6 +47,7 @@ namespace FakturniakUI
             this.toolStripStatusBarGodzina = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.buttonPokazFaktury = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -102,7 +103,7 @@ namespace FakturniakUI
             // 
             // NowaFaktura
             // 
-            this.NowaFaktura.Location = new System.Drawing.Point(185, 209);
+            this.NowaFaktura.Location = new System.Drawing.Point(328, 207);
             this.NowaFaktura.Name = "NowaFaktura";
             this.NowaFaktura.Size = new System.Drawing.Size(109, 37);
             this.NowaFaktura.TabIndex = 1;
@@ -169,9 +170,9 @@ namespace FakturniakUI
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(388, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(370, 17);
             this.toolStripStatusLabel1.Text = "                                                                                 " +
-    "                                              ";
+    "                                        ";
             // 
             // toolStripStatusBarGodzina
             // 
@@ -186,14 +187,25 @@ namespace FakturniakUI
             // 
             // timer2
             // 
-            this.timer2.Interval = 3000;
+            this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // buttonPokazFaktury
+            // 
+            this.buttonPokazFaktury.Location = new System.Drawing.Point(37, 207);
+            this.buttonPokazFaktury.Name = "buttonPokazFaktury";
+            this.buttonPokazFaktury.Size = new System.Drawing.Size(109, 37);
+            this.buttonPokazFaktury.TabIndex = 6;
+            this.buttonPokazFaktury.Text = "Pokaż faktury";
+            this.buttonPokazFaktury.UseVisualStyleBackColor = true;
+            this.buttonPokazFaktury.Click += new System.EventHandler(this.buttonPokazFaktury_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(489, 285);
+            this.Controls.Add(this.buttonPokazFaktury);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
@@ -236,6 +248,7 @@ namespace FakturniakUI
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusBarGodzina;
+        private System.Windows.Forms.Button buttonPokazFaktury;
     }
 }
 

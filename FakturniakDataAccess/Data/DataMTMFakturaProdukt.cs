@@ -35,18 +35,18 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        public Task<IEnumerable<ModelMTMFakturaProdukt>> Get()
+        /*public Task<IEnumerable<ModelMTMFakturaProdukt>> Get()
         {
             var result = _db.LoadData<ModelMTMFakturaProdukt, dynamic>("dbo.spProdukty_GetAll", new { });
             FakturniakStatus.zapytanie = false;
             return result;
-        }
+        }*/
 
-        public async Task<ModelMTMFakturaProdukt?> Load(int _id_produktu)
+        public Task<IEnumerable<ModelMTMFakturaProdukt>> LoadByNumerFaktury(string _numer_faktury)
         {
-            var results = await _db.LoadData<ModelMTMFakturaProdukt, dynamic>("dbo.spProdukty_GetByNumer", new { id_produktu = _id_produktu });
+            var results = _db.LoadData<ModelMTMFakturaProdukt, dynamic>("dbo.spMtmFakturaProdukty_GetByNumerFaktury", new { numer_faktury = _numer_faktury });
             FakturniakStatus.zapytanie = false;
-            return results.FirstOrDefault();
+            return results;
         }
 
         public Task Insert(ModelMTMFakturaProdukt mtmp) =>

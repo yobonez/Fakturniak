@@ -29,7 +29,7 @@ namespace FakturniakUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridViewKontrahenci = new System.Windows.Forms.DataGridView();
+            this.dataGridViewSzukaj = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nazwa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Imie = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,13 +45,13 @@ namespace FakturniakUI
             this.REGON = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonWybierz = new System.Windows.Forms.Button();
             this.textBoxSzukaj = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKontrahenci)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSzukaj)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridViewKontrahenci
+            // dataGridViewSzukaj
             // 
-            this.dataGridViewKontrahenci.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewKontrahenci.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewSzukaj.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSzukaj.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Nazwa,
             this.Imie,
@@ -65,12 +65,12 @@ namespace FakturniakUI
             this.NIP,
             this.KRS,
             this.REGON});
-            this.dataGridViewKontrahenci.Location = new System.Drawing.Point(12, 35);
-            this.dataGridViewKontrahenci.Name = "dataGridViewKontrahenci";
-            this.dataGridViewKontrahenci.RowTemplate.Height = 25;
-            this.dataGridViewKontrahenci.Size = new System.Drawing.Size(810, 353);
-            this.dataGridViewKontrahenci.TabIndex = 0;
-            this.dataGridViewKontrahenci.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewKontrahenci_CellClick);
+            this.dataGridViewSzukaj.Location = new System.Drawing.Point(12, 35);
+            this.dataGridViewSzukaj.Name = "dataGridViewSzukaj";
+            this.dataGridViewSzukaj.RowTemplate.Height = 25;
+            this.dataGridViewSzukaj.Size = new System.Drawing.Size(810, 353);
+            this.dataGridViewSzukaj.TabIndex = 0;
+            this.dataGridViewSzukaj.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewKontrahenci_CellClick);
             // 
             // ID
             // 
@@ -178,12 +178,12 @@ namespace FakturniakUI
             this.ClientSize = new System.Drawing.Size(834, 444);
             this.Controls.Add(this.textBoxSzukaj);
             this.Controls.Add(this.buttonWybierz);
-            this.Controls.Add(this.dataGridViewKontrahenci);
+            this.Controls.Add(this.dataGridViewSzukaj);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormSzukaj";
             this.Text = "FormSzukaj";
             this.Load += new System.EventHandler(this.FormSzukaj_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKontrahenci)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSzukaj)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,7 +191,7 @@ namespace FakturniakUI
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridViewKontrahenci;
+        private System.Windows.Forms.DataGridView dataGridViewSzukaj;
         private System.Windows.Forms.Button buttonWybierz;
         private System.Windows.Forms.TextBox textBoxSzukaj;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;

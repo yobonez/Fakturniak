@@ -17,14 +17,12 @@
 */
 
 using FakturniakDataAccess.Models;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FakturniakDataAccess.Data
 {
-    public interface IDataPrzychody
+    public interface IDataTypyFaktury
     {
-        Task<IEnumerable<ModelPrzychod>> Get();
-        Task<IEnumerable<ModelPrzychod>> Search(string _input);
+        Task<ModelTypFaktury> Load(int _id_typu_faktury);
     }
 }

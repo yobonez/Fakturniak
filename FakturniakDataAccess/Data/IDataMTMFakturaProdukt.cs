@@ -25,8 +25,9 @@ namespace FakturniakDataAccess.Data
     public interface IDataMTMFakturaProdukt
     {
         Task Delete(int _id_produktu);
-        Task<IEnumerable<ModelMTMFakturaProdukt>> Get();
+        //Task<IEnumerable<ModelMTMFakturaProdukt>> Get();
         Task Insert(ModelMTMFakturaProdukt mtmp);
-        Task<ModelMTMFakturaProdukt> Load(int _id_produktu);
+        //Task<ModelMTMFakturaProdukt> Load(int _id_produktu);
+        Task<IEnumerable<ModelMTMFakturaProdukt>> LoadByNumerFaktury(string _numer_faktury);
     }
 }

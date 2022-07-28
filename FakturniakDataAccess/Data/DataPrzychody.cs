@@ -33,9 +33,16 @@ namespace FakturniakDataAccess.Data
             _db = db;
         }
 
-        public Task<IEnumerable<ModelPrzychody>> Get()
+        public Task<IEnumerable<ModelPrzychod>> Get()
         {
-            var result = _db.LoadData<ModelPrzychody, dynamic>("dbo.spPrzychodyOgolem", new { });
+            var result = _db.LoadData<ModelPrzychod, dynamic>("dbo.spPrzychodyOgolem", new { });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
+
+        public Task<IEnumerable<ModelPrzychod>> Search(string _input)
+        {
+            var result = _db.LoadData<ModelPrzychod, dynamic>("dbo.spPrzychodyOgolem_Search", new { input = _input });
             FakturniakStatus.zapytanie = false;
             return result;
         }

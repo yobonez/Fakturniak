@@ -48,6 +48,13 @@ namespace FakturniakDataAccess.Data
             return results.FirstOrDefault();
         }
 
+        public Task<IEnumerable<ModelKontrahent>> Search(string _input)
+        {
+            var result = _db.LoadData<ModelKontrahent, dynamic>("dbo.spKontrahenci_Search", new { input = _input });
+            FakturniakStatus.zapytanie = false;
+            return result;
+        }
+
         public Task Insert(ModelKontrahent k) =>
             _db.SaveData(
                 "dbo.spKontrahenci_Add",
