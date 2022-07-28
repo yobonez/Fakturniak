@@ -83,21 +83,21 @@ namespace FakturniakUI
             // kontrahentaToolStripMenuItem
             // 
             this.kontrahentaToolStripMenuItem.Name = "kontrahentaToolStripMenuItem";
-            this.kontrahentaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.kontrahentaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.kontrahentaToolStripMenuItem.Text = "Kontrahenta";
             this.kontrahentaToolStripMenuItem.Click += new System.EventHandler(this.kontrahentaToolStripMenuItem_Click);
             // 
             // produktToolStripMenuItem
             // 
             this.produktToolStripMenuItem.Name = "produktToolStripMenuItem";
-            this.produktToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.produktToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.produktToolStripMenuItem.Text = "Produkt";
             this.produktToolStripMenuItem.Click += new System.EventHandler(this.produktToolStripMenuItem_Click);
             // 
             // sposóbPłatnościToolStripMenuItem
             // 
             this.sposóbPłatnościToolStripMenuItem.Name = "sposóbPłatnościToolStripMenuItem";
-            this.sposóbPłatnościToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.sposóbPłatnościToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sposóbPłatnościToolStripMenuItem.Text = "Sposób płatności";
             this.sposóbPłatnościToolStripMenuItem.Click += new System.EventHandler(this.sposóbPłatnościToolStripMenuItem_Click);
             // 

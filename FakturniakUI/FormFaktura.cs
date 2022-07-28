@@ -473,14 +473,14 @@ namespace FakturniakUI
                 // KONIEC INSERTA
 
                 FakturniakStatus.refreshMenu = true;
+                MessageBox.Show(this, "Pomyślnie wystawiono fakturę.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult drukResult = MessageBox.Show(this, "Czy chcesz zobaczyć podgląd/wydrukować tę fakturę?", "Opcja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (drukResult != DialogResult.Yes)
+                    this.Focus();
+                else
+                    PodgladDruk(0);
             }
 
-            MessageBox.Show(this, "Pomyślnie wystawiono fakturę.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            DialogResult drukResult = MessageBox.Show(this, "Czy chcesz zobaczyć podgląd/wydrukować tę fakturę?", "Opcja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (drukResult != DialogResult.Yes)
-                this.Focus();
-            else
-                PodgladDruk(0);
         }
 
         private void Podglad_Click(object sender, EventArgs e)
