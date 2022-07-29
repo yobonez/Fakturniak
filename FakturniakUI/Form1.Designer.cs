@@ -48,6 +48,7 @@ namespace FakturniakUI
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.buttonPokazFaktury = new System.Windows.Forms.Button();
+            this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -58,7 +59,8 @@ namespace FakturniakUI
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
-            this.utwórzToolStripMenuItem});
+            this.utwórzToolStripMenuItem,
+            this.oProgramieToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(489, 24);
@@ -200,6 +202,13 @@ namespace FakturniakUI
             this.buttonPokazFaktury.UseVisualStyleBackColor = true;
             this.buttonPokazFaktury.Click += new System.EventHandler(this.buttonPokazFaktury_Click);
             // 
+            // oProgramieToolStripMenuItem
+            // 
+            this.oProgramieToolStripMenuItem.Name = "oProgramieToolStripMenuItem";
+            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.oProgramieToolStripMenuItem.Text = "O programie";
+            this.oProgramieToolStripMenuItem.Click += new System.EventHandler(this.oProgramieToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -249,6 +258,7 @@ namespace FakturniakUI
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusBarGodzina;
         private System.Windows.Forms.Button buttonPokazFaktury;
+        private System.Windows.Forms.ToolStripMenuItem oProgramieToolStripMenuItem;
     }
 }
 

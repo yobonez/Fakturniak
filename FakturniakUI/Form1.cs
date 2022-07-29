@@ -243,5 +243,11 @@ namespace FakturniakUI
                 }
             }
         }
+
+        private void oProgramieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormO formO = new FormO();
+            formO.Show();
+        }
     }
 }

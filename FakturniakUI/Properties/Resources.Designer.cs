@@ -69,5 +69,25 @@ namespace FakturniakUI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EFSI_poziom_kolor_rgb1 {
+            get {
+                object obj = ResourceManager.GetObject("EFSI_poziom_kolor_rgb1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gplv3logo {
+            get {
+                object obj = ResourceManager.GetObject("gplv3logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
