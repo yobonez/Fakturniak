@@ -213,21 +213,21 @@ namespace FakturniakUI
                         Decimal wartosc_vat = wartosc_brutto - cena_netto;
 
                         _produkty_szczegoly.Add
-                            (
-                                new object[]
-                                {
-                                    0,
-                                    nazwa_produktu,
-                                    jednostka_miary,
-                                    ilosc,
-                                    cena_netto,
-                                    cena_brutto,
-                                    stawka_vat,
-                                    wartosc_vat,
-                                    wartosc_brutto,
-                                    produkt.id_produktu
-                                }
-                            );
+                        (
+                            new object[]
+                            {
+                                0,
+                                nazwa_produktu,
+                                jednostka_miary,
+                                ilosc,
+                                cena_netto,
+                                cena_brutto,
+                                stawka_vat,
+                                wartosc_vat,
+                                wartosc_brutto,
+                                produkt.id_produktu
+                            }
+                        );
                     }
 
                     FakturaViewer fakturaViewer = new FakturaViewer(_faktura, 

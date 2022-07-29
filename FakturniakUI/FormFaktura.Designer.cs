@@ -1107,7 +1107,7 @@ namespace FakturniakUI
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.Name = "FormFaktura";
-            this.Text = "FormFaktura";
+            this.Text = "Faktura";
             this.Load += new System.EventHandler(this.FormFaktura_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -181,7 +181,7 @@ namespace FakturniakUI
             this.Controls.Add(this.dataGridViewSzukaj);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormSzukaj";
-            this.Text = "FormSzukaj";
+            this.Text = "Szukaj";
             this.Load += new System.EventHandler(this.FormSzukaj_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSzukaj)).EndInit();
             this.ResumeLayout(false);

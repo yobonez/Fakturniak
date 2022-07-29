@@ -103,7 +103,7 @@ namespace FakturniakUI
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormLogowanie";
-            this.Text = "FormLogowanie";
+            this.Text = "Zaloguj się";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormLogowanie_FormClosed);
             this.Load += new System.EventHandler(this.FormLogowanie_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
